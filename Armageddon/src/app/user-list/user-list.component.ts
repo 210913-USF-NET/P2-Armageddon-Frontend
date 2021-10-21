@@ -16,9 +16,12 @@ export class UserListComponent implements OnInit {
   ngOnInit(): void {
 
     this.armageddonService.getAllUsers().then(result => {
-
       this.users = result; 
     })
+  }
+
+  goToUser(userId: number){
+
   }
 
 }
