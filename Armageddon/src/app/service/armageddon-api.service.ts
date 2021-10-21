@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { user } from '../models/user';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class ArmageddonApiService {
 
-  rootUrl: string = "https://armageddonapi.azurewebsites.net/api/user";
+  rootUrl: string = environment.bsAPIUrl;
   constructor(private http: HttpClient) { }
 
   getAllUsers(): Promise<user[]>{

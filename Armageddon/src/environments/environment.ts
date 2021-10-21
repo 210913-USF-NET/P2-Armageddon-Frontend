@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  bsAPIUrl: 'https://armageddonapi.azurewebsites.net/api/',
+  authDomain: 'dev-h9cu82b6.us.auth0.com',
+  authClientId: 'dPB5OsYmHvZCTm89mIyXYQk0HDjSkmdG'
 };
 
 /*
