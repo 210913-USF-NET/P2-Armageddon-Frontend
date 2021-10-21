@@ -15,7 +15,7 @@ export class AuthComponent implements OnInit {
   rootUrl: string = 'http://localhost:4200';
 
   ngOnInit(): void {
-    this.auth.isAuthenticated$.subscribe((isLoggedIn) => {
+    this.auth.isAuthenticated$.subscribe(isLoggedIn => {
       console.log('is auth?', isLoggedIn);
     })
   }

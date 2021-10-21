@@ -10,6 +10,7 @@ import { MatchListComponent } from './match-list/match-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { environment } from 'src/environments/environment';
+import { LandingComponent } from './landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { environment } from 'src/environments/environment';
     UserListComponent,
     MatchListComponent,
     UserDetailComponent,
-    AuthComponent
+    AuthComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,
