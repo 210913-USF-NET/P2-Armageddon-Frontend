@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ArmageddonApiService } from 'src/app/service/armageddon-api.service';
+import { user } from '../../../models/user';
 
 @Component({
   selector: 'app-leaderboard',
@@ -6,11 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
+
 export class LeaderboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private armageddonService: ArmageddonApiService) { }
+
+  users: user[] = [];
 
   ngOnInit(): void {
+    this.armageddonService.getAllUsers().then(result => {
+      this.users = result;
+      result.sort((a, b) => (a.totalWins > b.totalWins) ? 1 : -1);
+    })
   }
 
 }

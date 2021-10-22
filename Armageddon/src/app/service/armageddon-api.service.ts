@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { user } from '../models/user';
 import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class ArmageddonApiService {
 
   rootUrl: string = environment.bsAPIUrl;
   constructor(private http: HttpClient) { }
 
-  getAllUsers(): Promise<user[]>{
+  getAllUsers(): Promise<user[]> {
 
     //by default, httpClient returns observables
     //they are similar to promises, but instead of promise resolving once it receives the data
@@ -28,7 +30,7 @@ export class ArmageddonApiService {
   }
 
   addUser(user: user): Promise<user> {
-    return this.http.post<user>(this.rootUrl+"/user/", user).toPromise();
+    return this.http.post<user>(this.rootUrl + "/user/", user).toPromise();
   }
 
 
