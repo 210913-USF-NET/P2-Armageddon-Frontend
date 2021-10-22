@@ -24,7 +24,11 @@ export class ArmageddonApiService {
   }
 
   getUserByName(name: string): Promise<user> {
-    return this.http.get<user>(this.rootUrl + "/" + name).toPromise();
+    return this.http.get<user>(this.rootUrl + "/user/" + name).toPromise();
+  }
+
+  addUser(user: user): Promise<user> {
+    return this.http.post<user>(this.rootUrl+"/user/", user).toPromise();
   }
 
 

@@ -12,7 +12,7 @@ export class LandingComponent implements OnInit {
 
   id = 0;
   user: user = {
-    id: 5,
+    id: 0,
     name: 'random',
     password: 'password',
     winStreak: 0,
@@ -28,6 +28,15 @@ export class LandingComponent implements OnInit {
 
   goToHome(): void {
     //navigate by absolute path
+    var randomName = Math.random().toString(36).substr(2);
+    this.user.name = randomName;
+    var randomPassword = Math.random().toString(36).substr(2);
+    this.user.password = randomPassword;
+    //bug
+    /*this.bsService.addUser(this.user).then((res) => {
+      alert('Welcome Guess:' + randomName+ '!')
+      this.router.navigateByUrl(`home/${this.user.name}`);
+    });*/
     this.router.navigateByUrl(`home/${this.user.name}`);
   }
 
