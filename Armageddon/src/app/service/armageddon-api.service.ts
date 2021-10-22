@@ -15,7 +15,7 @@ export class ArmageddonApiService {
     //by default, httpClient returns observables
     //they are similar to promises, but instead of promise resolving once it receives the data
     //observables keeps the line open
-    return this.http.get<[]>(this.rootUrl).toPromise();
+    return this.http.get<[]>(this.rootUrl + "/user/").toPromise();
 
   }
 
