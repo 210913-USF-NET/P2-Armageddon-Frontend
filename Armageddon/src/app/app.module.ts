@@ -12,6 +12,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { environment } from 'src/environments/environment';
 import { LandingComponent } from './landing/landing.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +21,7 @@ import { LandingComponent } from './landing/landing.component';
     UserDetailComponent,
     AuthComponent,
     LandingComponent
+
   ],
   imports: [
     BrowserModule,

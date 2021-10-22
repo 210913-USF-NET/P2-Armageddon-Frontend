@@ -10,11 +10,13 @@ import { User } from '@auth0/auth0-spa-js';
 })
 export class AuthComponent implements OnInit {
 
+
   constructor(public auth: AuthService, @Inject(DOCUMENT) public document: Document) { }
 
   rootUrl: string = 'http://localhost:4200';
 
   ngOnInit(): void {
+
     this.auth.isAuthenticated$.subscribe(isLoggedIn => {
       console.log('is auth?', isLoggedIn);
     })
