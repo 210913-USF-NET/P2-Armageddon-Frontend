@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AuthenticationButtonComponent } from '../components/authentication-button/authentication-button.component';
 
 import { LandingComponent } from './landing.component';
 

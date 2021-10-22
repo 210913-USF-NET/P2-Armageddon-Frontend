@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
-  selector: 'app-landing',
-  templateUrl: './landing.component.html',
-  styleUrls: ['./landing.component.css']
+  selector: 'app-landing-page',
+  templateUrl: './landing-page.component.html',
+  styles: [
+  ]
 })
-export class LandingComponent implements OnInit {
+export class LandingPageComponent implements OnInit {
   profileJson: string = '';
 
   constructor(public auth: AuthService) { }
@@ -16,4 +17,5 @@ export class LandingComponent implements OnInit {
       (profile) => (this.profileJson = JSON.stringify(profile, null, 2)),
     );
   }
+
 }

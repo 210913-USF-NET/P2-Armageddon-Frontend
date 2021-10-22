@@ -1,12 +1,13 @@
+// src/app/pages/profile/profile.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
-  selector: 'app-landing',
-  templateUrl: './landing.component.html',
-  styleUrls: ['./landing.component.css']
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
 })
-export class LandingComponent implements OnInit {
+export class ProfileComponent implements OnInit {
   profileJson: string = '';
 
   constructor(public auth: AuthService) { }

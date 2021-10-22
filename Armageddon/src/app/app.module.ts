@@ -7,8 +7,13 @@ import { UserListComponent } from './user-list/user-list.component';
 import { MatchListComponent } from './match-list/match-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-import { AuthComponent } from './auth/auth.component';
 import { AuthModule } from '@auth0/auth0-angular';
+import { LoginButtonComponent } from './components/login-button/login-button.component';
+import { SignupButtonComponent } from './components/signup-button/signup-button.component';
+import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
+import { AuthenticationButtonComponent } from './components/authentication-button/authentication-button.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +21,12 @@ import { AuthModule } from '@auth0/auth0-angular';
     UserListComponent,
     MatchListComponent,
     UserDetailComponent,
-    AuthComponent
+    LoginButtonComponent,
+    SignupButtonComponent,
+    LogoutButtonComponent,
+    AuthenticationButtonComponent,
+    ProfileComponent,
+    LandingPageComponent,
   ],
   imports: [
     BrowserModule,
