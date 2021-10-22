@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArmageddonApiService } from 'src/app/service/armageddon-api.service';
-import { user } from '../models/user';
+import { user } from '../../../models/user';
 import { AuthService } from '@auth0/auth0-angular';
+
 @Component({
-  selector: 'app-landing',
-  templateUrl: './landing.component.html',
-  styleUrls: ['./landing.component.css']
+  selector: 'app-play-as-guest',
+  templateUrl: './play-as-guest.component.html',
+  styles: [
+  ]
 })
-export class LandingComponent implements OnInit {
+export class PlayAsGuestComponent implements OnInit {
   profileJson: string = '';
 
   id = 0;

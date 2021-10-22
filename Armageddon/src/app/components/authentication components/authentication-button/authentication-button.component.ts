@@ -8,6 +8,7 @@ import { AuthService } from '@auth0/auth0-angular';
   templateUrl: './authentication-button.component.html',
   styles: [],
 })
+
 export class AuthenticationButtonComponent implements OnInit {
   constructor(public auth: AuthService) { }
 
