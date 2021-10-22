@@ -5,8 +5,7 @@ import { user } from '../../../models/user';
 @Component({
   selector: 'app-leaderboard',
   templateUrl: './leaderboard.component.html',
-  styles: [
-  ]
+  styles: []
 })
 
 export class LeaderboardComponent implements OnInit {
@@ -18,7 +17,7 @@ export class LeaderboardComponent implements OnInit {
   ngOnInit(): void {
     this.armageddonService.getAllUsers().then(result => {
       this.users = result;
-      result.sort((a, b) => (a.totalWins > b.totalWins) ? 1 : -1);
+      result.sort((a, b) => (a.totalWins < b.totalWins) ? 1 : -1);
     })
   }
 

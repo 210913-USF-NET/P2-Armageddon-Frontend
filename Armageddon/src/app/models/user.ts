@@ -1,6 +1,6 @@
 export interface user {
     id: number;
-    name: string;
+    username: string;
     password: string;
     winStreak: number;
     shotStreak: number;

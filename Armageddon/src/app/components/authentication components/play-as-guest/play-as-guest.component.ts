@@ -16,7 +16,7 @@ export class PlayAsGuestComponent implements OnInit {
   id = 0;
   user: user = {
     id: 0,
-    name: 'random',
+    username: 'random',
     password: 'password',
     winStreak: 0,
     shotStreak: 0,
@@ -34,7 +34,7 @@ export class PlayAsGuestComponent implements OnInit {
   goToHome(): void {
     //navigate by absolute path
     var randomName = Math.random().toString(36).substr(2);
-    this.user.name = randomName;
+    this.user.username = randomName;
     var randomPassword = Math.random().toString(36).substr(2);
     this.user.password = randomPassword;
     //bug
@@ -42,6 +42,6 @@ export class PlayAsGuestComponent implements OnInit {
       alert('Welcome Guess:' + randomName+ '!')
       this.router.navigateByUrl(`home/${this.user.name}`);
     });*/
-    this.router.navigateByUrl(`home/${this.user.name}`);
+    this.router.navigateByUrl(`home/${this.user.username}`);
   }
 }

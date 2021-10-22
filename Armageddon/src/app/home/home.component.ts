@@ -9,20 +9,20 @@ import { user } from '../models/user';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
- 
+
   constructor(private currentRoute: ActivatedRoute, private bsApi: ArmageddonApiService) { }
   rootUrl: string = 'http://localhost:4200';
-  
+
   user: user = {
     id: 0,
-    name: 'name',
+    username: 'username',
     password: 'password',
     winStreak: 0,
     shotStreak: 0,
     totalWins: 0,
     totalMatches: 0
   };
-  
+
   ngOnInit(): void {
   }
 }
