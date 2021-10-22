@@ -9,6 +9,7 @@ import { AuthService } from '@auth0/auth0-angular';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
+  profileJson: string = '';
 
   id = 0;
   user: user = {
@@ -24,8 +25,10 @@ export class LandingComponent implements OnInit {
   constructor(private currRoute: ActivatedRoute, private bsService: ArmageddonApiService, private router: Router, private auth: AuthService) { }
 
   ngOnInit(): void {
+    this.auth.user$.subscribe(
+      (profile) => (this.profileJson = JSON.stringify(profile, null, 2)),
+    );
   }
-
   goToHome(): void {
     //navigate by absolute path
     var randomName = Math.random().toString(36).substr(2);
@@ -39,5 +42,4 @@ export class LandingComponent implements OnInit {
     });*/
     this.router.navigateByUrl(`home/${this.user.name}`);
   }
-
 }

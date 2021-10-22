@@ -11,7 +11,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { environment } from 'src/environments/environment';
 import { LandingComponent } from './landing/landing.component';
-
+import { LoginButtonComponent } from './components/login-button/login-button.component';
+import { SignupButtonComponent } from './components/signup-button/signup-button.component';
+import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
+import { AuthenticationButtonComponent } from './components/authentication-button/authentication-button.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -19,9 +24,13 @@ import { LandingComponent } from './landing/landing.component';
     UserListComponent,
     MatchListComponent,
     UserDetailComponent,
-    AuthComponent,
-    LandingComponent
-
+    LandingComponent,
+    LoginButtonComponent,
+    SignupButtonComponent,
+    LogoutButtonComponent,
+    AuthenticationButtonComponent,
+    ProfileComponent,
+    LandingPageComponent,
   ],
   imports: [
     BrowserModule,

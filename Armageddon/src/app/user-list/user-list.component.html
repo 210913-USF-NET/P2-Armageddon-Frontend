@@ -1,25 +1,25 @@
 <div class="container">
-    <h2>Users</h2>
-    <table class="table table-hover">
-        <thead>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Password</th>
-            <th>Winstreak</th>
-            <th>Shotstreak</th>
-            <th>TotalWins</th>
-            <th>Total Matches</th>
-        </thead>
-        <tbody>
-            <tr *ngFor= "let user of users ">
-                <td>{{user.id}}</td>
-                <td>{{user.name}}</td>
-                <td>{{user.password}}</td>
-                <td>{{user.winStreak}}</td>
-                <td>{{user.shotStreak}}</td>
-                <td>{{user.totalWins}}</td>
-                <td>{{user.totalMatches}}</td>
-            </tr>
-        </tbody>
-    </table>
+  <h2>Users</h2>
+  <table class="table table-hover">
+    <thead>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Password</th>
+      <th>Winstreak</th>
+      <th>Shotstreak</th>
+      <th>TotalWins</th>
+      <th>Total Matches</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users ">
+        <td>{{user.id}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.password}}</td>
+        <td>{{user.winStreak}}</td>
+        <td>{{user.shotStreak}}</td>
+        <td>{{user.totalWins}}</td>
+        <td>{{user.totalMatches}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
