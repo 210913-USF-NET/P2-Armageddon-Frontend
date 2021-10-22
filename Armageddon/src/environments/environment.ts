@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  bsAPIUrl: 'https://armageddonapi.azurewebsites.net/api',
   authDomain: 'dev-9prkqivq.us.auth0.com',
   authClientId: 'THxpSzDld5aeNgJXovot3N6NJr3zq14u'
 };

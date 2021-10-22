@@ -1,0 +1,25 @@
+
+<div class="username square">
+  <span>Hello, {{user.name}}</span>
+  <button class="btn btn-default" (click)="{ returnTo: rootUrl}">Log out</button>
+
+</div>
+<div class="gamelink square">
+  <p>gamelink</p>
+</div>
+<div class="playnow square">
+  <p>playnow</p>
+</div>
+<div class=" playwithfriend square">
+  <p>playwithfriend</p>
+</div>
+<div class="profile round">
+  <p>profile</p>
+  <p>Win Streak: {{user.winStreak}}</p>
+  <p>Shot Streak: {{user.shotStreak}}</p>
+  <p>Total Wins: {{user.totalWins}}</p>
+  <p>Total Matches{{user.totalMatches}}</p>
+</div>
+<div class="leaderboard round">
+  <p>leaderboard, this will be create as component and import as app-leaderboard</p>
+</div>
