@@ -7,10 +7,10 @@
       <div class="card col-5">
         <ul class="list-group list-group-flush">
           <a class="btn" href="#" role="button">Log In</a>
-          <a><app-auth></app-auth></a>
+          <app-auth></app-auth>
           
           <a class="btn" href="#" role="button">Sign Up</a>
-          <a class="btn" href="#" role="button">Play as Guest</a>
+          <a class="btn" (click)="goToHome()" role="button">Play as Guest</a>
         </ul>
       </div>
       

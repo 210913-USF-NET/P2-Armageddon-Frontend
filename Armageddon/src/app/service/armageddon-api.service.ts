@@ -18,4 +18,14 @@ export class ArmageddonApiService {
     return this.http.get<[]>(this.rootUrl).toPromise();
 
   }
+
+  getUserById(id: number): Promise<user> {
+    return this.http.get<user>(this.rootUrl + "/user/" + id).toPromise();
+  }
+
+  getUserByName(name: string): Promise<user> {
+    return this.http.get<user>(this.rootUrl + "/" + name).toPromise();
+  }
+
+
 }
