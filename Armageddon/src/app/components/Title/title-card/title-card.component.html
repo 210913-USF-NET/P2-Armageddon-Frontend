@@ -1,3 +1,19 @@
-<div id="container">
-    <h1>ARMAGEDDON</h1>
-  </div>
+
+<div class="header">
+  <h1 class="text-center">Game Board</h1>
+  <hr />
+</div>
+<div class="container" id="mainDiv">
+  <!-- This div is for the items and their information -->
+  <img
+    id="drag1"
+    src="./ShipBattleshipHull.png"
+    draggable="true"
+    ondragstart="drag(event)"
+  />
+  <button (click)="createBoard()"></button>
+  <div class="grid" id="itemsList"></div>
+</div>
+
+<!-- <button (click)="testFunc()"></button>
+<table id="test" class="grid"></table> -->
