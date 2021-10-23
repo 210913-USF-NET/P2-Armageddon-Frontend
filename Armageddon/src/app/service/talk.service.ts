@@ -8,7 +8,7 @@ export class TalkService {
   private currentUser: Talk.User;
   user$:any;
   constructor(private auth: AuthService) {
-    auth.user$.subscribe((user:any) => {
+    this.auth.user$.subscribe((user:any) => {
       this.user$ = user;
     })
   }
