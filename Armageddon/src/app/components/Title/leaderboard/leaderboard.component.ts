@@ -16,7 +16,7 @@ export class LeaderboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.armageddonService.getAllUsers().then(result => {
-      this.users = result;
+      this.users = result.slice(0, 5);
       result.sort((a, b) => (a.totalWins < b.totalWins) ? 1 : -1);
     })
   }
