@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 
-body{ 
+/* body{ 
     background: #050505;
-}
+} */
 
 #container {
   width: 70vw;
@@ -19,3 +19,27 @@ h1 {
   margin: 0;
   line-height: 0;
 }
+.grid {
+    display: grid;
+    grid-template-columns: repeat(10, 3fr);
+    /* border: 2px solid red; */
+    /* establish flex container */
+    flex-wrap: wrap;
+    max-width: 500px;
+    /* width: 50%; */
+    /* enable flex items to wrap */
+    /* justify-content: space-around; */
+  }
+  .cell {
+    /* display: flex; */
+    /* text-align: center; */
+    border: 1px solid black;
+    border-collapse: collapse;
+    /* justify-content: center; */
+    height: 50px;
+    width: 50px;
+  }
+  .cell:hover {
+    background-color: #f7d040;
+  }
+
