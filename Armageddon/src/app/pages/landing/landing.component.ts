@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ArmageddonApiService } from 'src/app/service/armageddon-api.service';
 import { user } from '../../models/user';
 import { AuthService } from '@auth0/auth0-angular';
+
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
@@ -15,26 +16,67 @@ export class LandingComponent implements OnInit {
   user: user = {
     id: 0,
     username: 'random',
-    password: 'password',
+    email: 'password',
+    winStreak: 0,
+    shotStreak: 0,
+    totalWins: 0,
+    totalMatches: 0
+  };
+  
+  loggedInUser: user = {
+    id: 0,
+    username: '',
+    email: '',
     winStreak: 0,
     shotStreak: 0,
     totalWins: 0,
     totalMatches: 0
   };
 
-  constructor(private currRoute: ActivatedRoute, private bsService: ArmageddonApiService, private router: Router, private auth: AuthService) { }
+  constructor(private currRoute: ActivatedRoute, public bsService: ArmageddonApiService, private router: Router, public auth: AuthService) { }
 
   ngOnInit(): void {
+    // this.bsService.getUserByName(this.auth.user$.su));
     this.auth.user$.subscribe(
       (profile) => (this.profileJson = JSON.stringify(profile, null, 2)),
     );
-  }
+
+    this.auth.user$.subscribe(
+      (profile) => (this.loggedInUser.username = profile!.nickname!,
+                    this.loggedInUser.email = profile!.email!)
+    );
+
+    console.log(this.loggedInUser);
+    
+    this.auth.user$.subscribe(
+      (profile) => (this.bsService.getUserByName(this.loggedInUser.username).then((value: user) => {
+        // success
+        if (value)
+        {
+          this.loggedInUser.id = value.id;
+          this.loggedInUser.shotStreak = value.shotStreak;
+          this.loggedInUser.totalMatches = value.totalMatches;
+          this.loggedInUser.totalWins = value.totalWins;
+          this.loggedInUser.winStreak = value.winStreak;
+        }
+        else {
+          this.bsService.addUser(this.loggedInUser).then((res) => {
+            alert('Welcome!');
+          });
+        }
+      },)
+    ));
+
+    console.log(this.loggedInUser)
+    
+    }
+  
   goToHome(): void {
     //navigate by absolute path
     var randomName = Math.random().toString(36).substr(2);
     this.user.username = randomName;
     var randomPassword = Math.random().toString(36).substr(2);
-    this.user.password = randomPassword;
+    this.user.email = randomPassword;
     //bug
     /*this.bsService.addUser(this.user).then((res) => {
       alert('Welcome Guess:' + randomName+ '!')
@@ -42,4 +84,15 @@ export class LandingComponent implements OnInit {
     });*/
     this.router.navigateByUrl(`home/${this.user.username}`);
   }
+
+  // google onload attribute!
+  // This section needs to be in the html. Also needs to be turned into an input-thing that autosends. 
+  // <div *ngIf="auth.user$ | async as user">
+  //   <button (click)="Data(profileJson)"></button>
+  // </div>
+  //
+  // this collects said data in the TS
+  // Data(D:any): void {
+  //     console.log(D)
+  // }
 }

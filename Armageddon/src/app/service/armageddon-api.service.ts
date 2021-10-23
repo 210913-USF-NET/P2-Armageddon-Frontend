@@ -22,11 +22,11 @@ export class ArmageddonApiService {
   }
 
   getUserById(id: number): Promise<user> {
-    return this.http.get<user>(this.rootUrl + "/user/" + id).toPromise();
+    return this.http.get<user>(this.rootUrl + "/user/id/" + id).toPromise();
   }
 
   getUserByName(name: string): Promise<user> {
-    return this.http.get<user>(this.rootUrl + "/user/" + name).toPromise();
+    return this.http.get<user>(this.rootUrl + "/user/username/" + name).toPromise();
   }
 
   addUser(user: user): Promise<user> {
