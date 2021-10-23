@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 
-/* body{ 
+body{ 
     background: #050505;
-} */
+}
 
 #container {
   width: 70vw;
