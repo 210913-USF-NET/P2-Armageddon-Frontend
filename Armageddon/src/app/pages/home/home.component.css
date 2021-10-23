@@ -20,6 +20,11 @@ div {
   height: 50px;
   line-height: 50px;
 }
+.titlecard {
+  position: absolute;
+  left: 200px;
+  top: 250px;
+}
 /*.ship{
 
 }*/
