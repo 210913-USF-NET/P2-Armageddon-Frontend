@@ -20,7 +20,15 @@ div {
   height: 50px;
   line-height: 50px;
 }
-.playnow {
+.titlecard {
+  position: absolute;
+  left: 200px;
+  top: 250px;
+}
+/*.ship{
+
+}*/
+/*.playnow {
   position: absolute;
   left: 250px;
   top: 300px;
@@ -53,4 +61,4 @@ div {
   height: 600px;
 }
 
-
+*/
