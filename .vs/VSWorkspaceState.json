@@ -4,13 +4,13 @@
     "\\Armageddon",
     "\\Armageddon\\src",
     "\\Armageddon\\src\\app",
-    "\\Armageddon\\src\\app\\landing",
-    "\\Armageddon\\src\\app\\match-list",
-    "\\Armageddon\\src\\app\\models",
+    "\\Armageddon\\src\\app\\components",
+    "\\Armageddon\\src\\app\\components\\authentication components",
+    "\\Armageddon\\src\\app\\components\\authentication components\\authentication-button",
+    "\\Armageddon\\src\\app\\components\\authentication components\\login-button",
     "\\Armageddon\\src\\app\\pages",
-    "\\Armageddon\\src\\app\\pages\\landing-page",
-    "\\Armageddon\\src\\app\\user-list"
+    "\\Armageddon\\src\\app\\pages\\profile"
   ],
-  "SelectedNode": "\\Armageddon\\src\\app\\landing",
+  "SelectedNode": "\\Armageddon\\src\\app\\service\\armageddon-api.service.spec.ts",
   "PreviewInSolutionExplorer": false
 }

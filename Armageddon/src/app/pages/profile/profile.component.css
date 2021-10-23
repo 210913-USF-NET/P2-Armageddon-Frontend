@@ -1,0 +1,99 @@
+.profile-header {
+  background-image: linear-gradient(to bottom, #7A88FF, #7AFFAF);
+  /*background-image: linear-gradient(to bottom, black, gray);*/
+  height: 200px;
+  /*opacity: 0.7;*/
+}
+.profile-body {
+  height: 100vh;
+  z-index: 0;
+  padding: 0;
+  margin: 0;
+  /*background-image: url('https://www.wallpaperflare.com/static/279/791/689/world-of-warships-wargaming-net-ship-explosion-wallpaper.jpg');*/
+  background-image: url('../../../assets/imgs/battleship.webp'),url('../../../assets/imgs/battleship.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.userimg {
+  position: absolute;
+  left: 200px;
+  top: 125px;
+  width: 150px;
+  height: 150px;
+  box-shadow: 0 0 50px #4DC2EC;
+  border-style: solid;
+  border-width: 4px;
+  border-color: beige;
+  opacity: 1;
+}
+.username {
+  position: absolute;
+  right: 400px;
+  top: 20px;
+  height: 100px;
+  text-align: center;
+  Line-height: 100px;
+  color: white;
+  opacity: 1;
+}
+.useremail {
+  position: absolute;
+  right: 400px;
+  top: 100px;
+  height: 100px;
+  text-align: center;
+  Line-height: 100px;
+  color: white;
+  opacity: 1;
+}
+
+
+
+.homebtn {
+  position: absolute;
+  right: 200px;
+  top: 100px;
+  background-color: aquamarine;
+  color: darkgray;
+  opacity: 1;
+}
+  .homebtn:hover {
+    background-color: #66B2FF;
+    opacity: 1;
+  }
+
+.bodydiv{
+  background-color: white;
+  width: 250px;
+  height: 125px;
+  opacity:0.7;
+  text-align:center;
+}
+.totalmatch {
+  position: absolute;
+  left: 400px;
+  top: 300px;
+}
+.totalwin {
+  position: absolute;
+  right: 400px;
+  top: 300px;
+}
+.winsteak {
+  position: absolute;
+  left: 400px;
+  bottom: 100px;
+}
+.shotstreak {
+  position: absolute;
+  right: 400px;
+  bottom: 100px;
+}
+h4{
+    margin-top:10px;
+    margin-bottom:20px;
+}
+
+
+
+
