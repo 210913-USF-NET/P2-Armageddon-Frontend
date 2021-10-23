@@ -11,23 +11,12 @@ export class BoardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.createBoard();
   }
   createBoard() {
     var grid = document.getElementById('itemsList')!
-    console.log(grid)
-    // let div = document.createElement('div')
-    // let div = document.createElement('div');
     for (let i = 0; i < 100; i++) {
       grid.innerHTML += `<div class="cell" id="cell${i}" draggable="false" ondrop="drop(event)" ondragover="allowDrop(event)"></div>`;
-      // let div = document.createElement('div');
-      // div.innerText = "test"
-
-      // div.id = 'cell' + i;
-      // div.className = 'cell';
-      // grid?.appendChild(div);
-      // grid.id = 'cell' + i
-      //   console.log(div)
-      //   grid.appendChild(div)
     }
   }
   // allowDrop(ev) {
