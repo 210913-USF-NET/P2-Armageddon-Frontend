@@ -1,6 +1,6 @@
 .profile-header {
-  background-image: linear-gradient(to bottom, #7A88FF, #7AFFAF);
-  /*background-image: linear-gradient(to bottom, black, gray);*/
+  /*background-image: linear-gradient(to bottom, #7A88FF, #7AFFAF);*/
+  background-image: linear-gradient(to bottom, black, gray);
   height: 200px;
   /*opacity: 0.7;*/
 }
@@ -10,9 +10,10 @@
   padding: 0;
   margin: 0;
   /*background-image: url('https://www.wallpaperflare.com/static/279/791/689/world-of-warships-wargaming-net-ship-explosion-wallpaper.jpg');*/
-  background-image: url('../../../assets/imgs/battleship.webp'),url('../../../assets/imgs/battleship.jpg');
+  /*background-image: url('../../../assets/imgs/battleship.webp'),url('../../../assets/imgs/battleship.jpg');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover;*/
+  background-image: linear-gradient(to bottom, gray, black);
 }
 .userimg {
   position: absolute;
@@ -20,7 +21,7 @@
   top: 125px;
   width: 150px;
   height: 150px;
-  box-shadow: 0 0 50px #4DC2EC;
+  box-shadow: 0 0 50px #e3f4fa;
   border-style: solid;
   border-width: 4px;
   border-color: beige;
@@ -53,12 +54,12 @@
   position: absolute;
   right: 200px;
   top: 100px;
-  background-color: aquamarine;
-  color: darkgray;
+  background-color: darkgray;
+  color: white;
   opacity: 1;
 }
   .homebtn:hover {
-    background-color: #66B2FF;
+    background-color: #657378;
     opacity: 1;
   }
 
