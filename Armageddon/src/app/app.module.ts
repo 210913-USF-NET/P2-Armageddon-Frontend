@@ -15,6 +15,9 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { PlayAsGuestComponent } from './components/authentication components/play-as-guest/play-as-guest.component';
 import { TitleCardComponent } from './components/Title/title-card/title-card.component';
 import { LeaderboardComponent } from './components/Title/leaderboard/leaderboard.component';
+import { PlayButtonComponent } from './components/authentication components/play-button/play-button.component';
+import { LobbyComponent } from './pages/lobby/lobby.component';
+import { ProfilebuttonComponent } from './components/Lobby/profilebutton/profilebutton.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,9 @@ import { LeaderboardComponent } from './components/Title/leaderboard/leaderboard
     PlayAsGuestComponent,
     TitleCardComponent,
     LeaderboardComponent,
+    PlayButtonComponent,
+    LobbyComponent,
+    ProfilebuttonComponent,
   ],
   imports: [
     BrowserModule,

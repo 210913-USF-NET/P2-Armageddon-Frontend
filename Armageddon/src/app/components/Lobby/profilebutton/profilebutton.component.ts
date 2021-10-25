@@ -1,21 +1,18 @@
-// src/app/pages/profile/profile.component.ts
-
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { user } from 'src/app/models/user';
 import { ArmageddonApiService } from 'src/app/service/armageddon-api.service';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'app-profilebutton',
+  templateUrl: './profilebutton.component.html',
+  styleUrls: ['./profilebutton.component.css']
 })
-export class ProfileComponent implements OnInit {
-  profileJson: string = '';
+export class ProfilebuttonComponent implements OnInit {
 
   constructor(private router: Router, private bsService: ArmageddonApiService, private auth: AuthService) { }
-  
+
   user: user = {
     id: 0,
     username: 'username',
@@ -27,7 +24,7 @@ export class ProfileComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.bsService.getUserByName(window.location.href.slice(30)).then((value) => {
+    this.bsService.getUserByName(window.location.href.slice(27)).then((value) => {
       this.user.id = value.id;
       this.user.username = value.username;
       this.user.email = value.email;
@@ -36,5 +33,9 @@ export class ProfileComponent implements OnInit {
       this.user.totalWins = value.totalWins;
       this.user.totalMatches = value.totalMatches;
     });
+  }
+
+  profilepage(): void {
+    this.router.navigateByUrl(`profile/${this.user.username}`)
   }
 }
