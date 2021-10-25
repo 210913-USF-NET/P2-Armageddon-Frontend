@@ -1,10 +1,10 @@
 // src/app/pages/profile/profile.component.ts
 
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { user } from 'src/app/models/user';
 import { ArmageddonApiService } from 'src/app/service/armageddon-api.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -37,4 +37,9 @@ export class ProfileComponent implements OnInit {
       this.user.totalMatches = value.totalMatches;
     });
   }
+
+  goToHome() {
+    this.router.navigateByUrl(`home/${this.user.username}`);
+  }
+
 }

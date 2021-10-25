@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { AuthGuard } from '@auth0/auth0-angular';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { LobbyComponent } from './pages/lobby/lobby.component';
+import { BoardComponent } from './components/Game/board/board.component';
 
 const routes: Routes = [
 
@@ -19,10 +20,18 @@ const routes: Routes = [
      canActivate: [AuthGuard]
   },
   {
+    path: 'board',
+    component: BoardComponent,
+  },
+  {
    path: '',
    component: LandingComponent
+  },
+  {
+    path: 'profile/:name',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   }
-
 ];
 
 @NgModule({

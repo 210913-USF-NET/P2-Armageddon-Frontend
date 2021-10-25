@@ -18,6 +18,8 @@ import { LeaderboardComponent } from './components/Title/leaderboard/leaderboard
 import { PlayButtonComponent } from './components/authentication components/play-button/play-button.component';
 import { LobbyComponent } from './pages/lobby/lobby.component';
 import { ProfilebuttonComponent } from './components/Lobby/profilebutton/profilebutton.component';
+import { HomeComponent } from './pages/home/home.component';
+/*import { GoHomeComponent } from './components/authentication components/go-home-button';*/
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { ProfilebuttonComponent } from './components/Lobby/profilebutton/profile
     PlayButtonComponent,
     LobbyComponent,
     ProfilebuttonComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
