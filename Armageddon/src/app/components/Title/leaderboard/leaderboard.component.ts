@@ -19,6 +19,7 @@ export class LeaderboardComponent implements OnInit {
     this.armageddonService.getAllUsers().then(result => {
       result.sort((a, b) => (a.totalWins < b.totalWins) ? 1 : -1);
       result.splice(this.AMOUNT);
+      this.users = result;
     })
   }
 

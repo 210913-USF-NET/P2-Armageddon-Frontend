@@ -16,7 +16,7 @@ export class FriendListComponent implements OnInit {
   user: user = {
     id: 1,
     username: '',
-    password: '',
+    email: '',
     winStreak: 0,
     shotStreak: 0,
     totalWins: 0,
@@ -30,7 +30,7 @@ export class FriendListComponent implements OnInit {
   userfriend: user = {
     id: 0,
     username: '',
-    password: '',
+    email: '',
     winStreak: 0,
     shotStreak: 0,
     totalWins: 0,

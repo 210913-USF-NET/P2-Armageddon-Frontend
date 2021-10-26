@@ -3,16 +3,20 @@ div {
     text-align:center;
     border-radius:8px;
   }
-  .username{
+  .username-box {
       position:absolute;left:200px; top:50px;
-      width:500px;
-      height:50px;
-      line-height:50px;
+      width:550px;
+      height:100px;
+      padding-top: 20px;
+  }
+  .greeting {
+    font-size: 30px;
+    padding: 35px;
   }
   .gamelink {
     position: absolute;
     left: 200px;
-    top: 150px;
+    top: 175px;
     width: 250px;
     height: 50px;
     line-height: 50px;
@@ -20,7 +24,7 @@ div {
   .ready {
     position: absolute;
     left: 500px;
-    top: 150px;
+    top: 175px;
     width: 250px;
     height: 50px;
     line-height: 50px;
@@ -93,14 +97,14 @@ div {
     left: 800px;
     top: 50px;
     width: 500px;
-    height: 300px;
+    height: 350px;
   }
   .lobbychat {
     position: absolute;
     left: 800px;
-    top: 400px;
+    top: 450px;
     width: 500px;
-    height: 500px;
+    height: 350px;
   }
   
   
