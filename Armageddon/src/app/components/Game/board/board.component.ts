@@ -30,6 +30,9 @@ export class BoardComponent implements OnInit {
   draggedShipLength: any
   childNodes: any
   selectedShipIndex: any;
+  startButton: any
+  turnDisplay: any
+  infoDisplay: any
 
   constructor() { }
 
@@ -44,6 +47,10 @@ export class BoardComponent implements OnInit {
     this.cruiser = document.querySelector('.cruiser-container')
     this.battleship = document.querySelector('.battleship-container')
     this.carrier = document.querySelector('.carrier-container')
+
+    this.startButton = document.querySelector('#start')
+    this.turnDisplay = document.querySelector('#whose-go')
+    this.infoDisplay = document.querySelector('#info')
 
     this.userSquares = []
     this.computerSquares = []
@@ -138,11 +145,35 @@ export class BoardComponent implements OnInit {
     else this.generate(ship)
   }
 
-  dragStart() {
-    this.draggedShip = this
+  rotate() {
+    console.log(this.isHorizontal)
+    if (this.isHorizontal) {
+      this.destroyer.classList.toggle('destroyer-container-vertical')
+      this.submarine.classList.toggle('submarine-container-vertical')
+      this.cruiser.classList.toggle('cruiser-container-vertical')
+      this.battleship.classList.toggle('battleship-container-vertical')
+      this.carrier.classList.toggle('carrier-container-vertical')
+      this.isHorizontal = false
+      return
+    }
+    else if (!this.isHorizontal) {
+      this.destroyer.classList.toggle('destroyer-container-vertical')
+      this.submarine.classList.toggle('submarine-container-vertical')
+      this.cruiser.classList.toggle('cruiser-container-vertical')
+      this.battleship.classList.toggle('battleship-container-vertical')
+      this.carrier.classList.toggle('carrier-container-vertical')
+      this.isHorizontal = true
+      return
+    }
+  }
+
+  dragStart(e: any) {
+    this.draggedShip = e.target.id
+    console.log(e.target)
     this.draggedShipLength = this.childNodes.length
     console.log("drag start")
     console.log(this.draggedShip)
+    console.log(this)
   }
 
   dragOver(e: any) {
@@ -157,8 +188,9 @@ export class BoardComponent implements OnInit {
     console.log('drag leave')
   }
 
-  dragDrop() {
+  dragDrop(e: Event) {
     console.log(this.draggedShip)
+    console.log(this)
     let shipNameWithLastId = this.draggedShip.lastChild.id
     let shipClass = shipNameWithLastId.slice(0, -2)
     console.log(shipClass)
@@ -179,13 +211,13 @@ export class BoardComponent implements OnInit {
 
     if (this.isHorizontal && !newNotAllowedHorizontal.includes(shipLastId)) {
       for (let i = 0; i < this.draggedShipLength; i++) {
-        this.userSquares[/*parseInt(this.dataset.id) - */ this.selectedShipIndex + i].classList.add('taken', shipClass)
+        this.userSquares[/*parseInt(this.dataset.id) - */this.selectedShipIndex + i].classList.add('taken', shipClass)
       }
       //As long as the index of the ship you are dragging is not in the newNotAllowedVertical array! This means that sometimes if you drag the ship by its
       //index-1 , index-2 and so on, the ship will rebound back to the displayGrid.
     } else if (!this.isHorizontal && !newNotAllowedVertical.includes(shipLastId)) {
       for (let i = 0; i < this.draggedShipLength; i++) {
-        this.userSquares[/*parseInt(this.dataset.id) - */ this.selectedShipIndex + this.width * i].classList.add('taken', shipClass)
+        this.userSquares[/*parseInt(this.dataset.id) - */this.selectedShipIndex + this.width * i].classList.add('taken', shipClass)
       }
     } else return
 
@@ -196,4 +228,14 @@ export class BoardComponent implements OnInit {
   dragEnd() {
     console.log('dragend')
   }
+
+  // playGame() {
+  //   if (this.isGameOver) return
+  //   if (this.currentPlayer === 'user') {
+  //     this.turnDisplay.innerHTML = 'Your Turn'
+  //     this.computerSquares.forEach((square: any) => square.addEventListener('click', function(e) {
+  //       revealSquare(square)
+  //     }))
+  //   }
+  // }
 }
