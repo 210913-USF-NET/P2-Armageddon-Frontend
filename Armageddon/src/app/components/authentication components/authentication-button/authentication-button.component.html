@@ -3,13 +3,19 @@ src/app/components/authentication-button/
   authentication-button.component.html
 -->
 
+<style>
+  .container {
+      text-align: center;
+  }
+</style>
+
 <div class="container" *ngIf="(auth.isAuthenticated$ | async) === false">
-      <app-login-button></app-login-button>
-      <app-signup-button></app-signup-button>
-      <app-play-as-guest></app-play-as-guest>
+      <p><app-login-button></app-login-button></p>
+      <p><app-signup-button></app-signup-button></p>
+      <p><app-play-as-guest></app-play-as-guest></p>
 </div>
 
 <div class="container" *ngIf="(auth.isAuthenticated$ | async) === true">
-  <app-play-button></app-play-button>
-  <app-logout-button *ngIf="auth.isAuthenticated$ | async"> </app-logout-button>
+  <p><app-play-button></app-play-button></p>
+  <p><app-logout-button></app-logout-button></p>
 </div>

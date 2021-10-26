@@ -35,7 +35,7 @@ import { FriendListComponent } from './friend-list/friend-list.component';
     TitleCardComponent,
     LeaderboardComponent,
     HomeComponent,
-    FriendListComponent
+    FriendListComponent,
     PlayButtonComponent,
     LobbyComponent,
     ProfilebuttonComponent,
