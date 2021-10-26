@@ -72,6 +72,7 @@ export class FriendListComponent implements OnInit {
   }
 
   addFriend(friendname: string) {
+
     this.armageddonService.getUserByName(friendname).then((res) => {
         this.userfriend = res;
         //I hard code 1 as the first user id, it should be current user id
@@ -91,6 +92,7 @@ export class FriendListComponent implements OnInit {
   }
 
   deleteFriend(friendname: string) {
+    
     let response = confirm(`do you really want to delete ${friendname}?`).valueOf()
 
     if (response) {

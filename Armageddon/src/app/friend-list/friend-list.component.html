@@ -6,8 +6,8 @@
        [ngClass]="{'active': selectedIndex == i, 'list-group-item': true}">{{friend.username}}</li>
   </ul>
   <div class="form-inline">
-    <a class="btn" (click)="popup=true" role="button">Add Friend</a>
-    <a class="btn"  (click)="popupd=true" role="button">Delete Friend</a>
+    <a class="btn" (click)="popup=true;select(-1)"  role="button">Add Friend</a>
+    <a class="btn"  (click)="popupd=true;select(-1)"   role="button">Delete Friend</a>
   </div>
 </div>
 
