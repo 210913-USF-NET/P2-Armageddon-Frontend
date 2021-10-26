@@ -19,6 +19,7 @@ import { PlayButtonComponent } from './components/authentication components/play
 import { LobbyComponent } from './pages/lobby/lobby.component';
 import { ProfilebuttonComponent } from './components/Lobby/profilebutton/profilebutton.component';
 import { HomeComponent } from './pages/home/home.component';
+import { FriendListComponent } from './friend-list/friend-list.component';
 /*import { GoHomeComponent } from './components/authentication components/go-home-button';*/
 
 @NgModule({
@@ -33,10 +34,11 @@ import { HomeComponent } from './pages/home/home.component';
     PlayAsGuestComponent,
     TitleCardComponent,
     LeaderboardComponent,
+    HomeComponent,
+    FriendListComponent
     PlayButtonComponent,
     LobbyComponent,
     ProfilebuttonComponent,
-    HomeComponent
   ],
   imports: [
     BrowserModule,

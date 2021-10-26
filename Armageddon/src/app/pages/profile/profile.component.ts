@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit {
   }
 
   goToHome() {
-    this.router.navigateByUrl(`home/${this.user.username}`);
+    this.router.navigateByUrl(`home`);
   }
 
 }
