@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '@auth0/auth0-spa-js';
 
 @Component({
   selector: 'app-board',
@@ -33,6 +34,16 @@ export class BoardComponent implements OnInit {
   startButton: any
   turnDisplay: any
   infoDisplay: any
+  destroyerCount: any
+  submarineCount: any
+  cruiserCount: any
+  battleshipCount: any
+  carrierCount: any
+  cpuDestroyerCount: any
+  cpuSubmarineCount: any
+  cpuCruiserCount: any
+  cpuBattleshipCount: any
+  cpuCarrierCount: any
 
   constructor() { }
 
@@ -57,8 +68,20 @@ export class BoardComponent implements OnInit {
     this.width = 10
 
     this.isHorizontal = true
-    this.isGameOver = true
+    this.isGameOver = false
     this.currentPlayer = 'user'
+
+    this.destroyerCount = 0
+    this.submarineCount = 0
+    this.cruiserCount = 0
+    this.battleshipCount = 0
+    this.carrierCount = 0
+
+    this.cpuDestroyerCount = 0
+    this.cpuSubmarineCount = 0
+    this.cpuCruiserCount = 0
+    this.cpuBattleshipCount = 0
+    this.cpuCarrierCount = 0
 
     this.shipArray = [
       {
@@ -101,6 +124,12 @@ export class BoardComponent implements OnInit {
     this.createBoard(this.userGrid, this.userSquares)
     this.createBoard(this.computerGrid, this.computerSquares)
 
+    this.generateUser(this.shipArray[0])
+    this.generateUser(this.shipArray[1])
+    this.generateUser(this.shipArray[2])
+    this.generateUser(this.shipArray[3])
+    this.generateUser(this.shipArray[4])
+
     this.generate(this.shipArray[0])
     this.generate(this.shipArray[1])
     this.generate(this.shipArray[2])
@@ -128,6 +157,21 @@ export class BoardComponent implements OnInit {
       grid.appendChild(square)
       squares.push(square)
     }
+  }
+
+  generateUser(ship: any) {
+    let randomDirection = Math.floor(Math.random() * ship.directions.length)
+    let current = ship.directions[randomDirection]
+    if (randomDirection === 0) this.direction = 1
+    if (randomDirection === 1) this.direction = 10
+    let randomStart = Math.abs(Math.floor(Math.random() * this.userSquares.length - (ship.directions[0].length * this.direction)))
+
+    const isTaken = current.some((index: any) => this.userSquares[randomStart + index].classList.contains('taken'))
+    const isAtRightEdge = current.some((index: any) => (randomStart + index) % this.width === this.width - 1)
+    const isAtLeftEdge = current.some((index: any) => (randomStart + index) % this.width === 0)
+
+    if (!isTaken && !isAtRightEdge && !isAtLeftEdge) current.forEach((index: any) => this.userSquares[randomStart + index].classList.add('taken', ship.name))
+    else this.generateUser(ship)
   }
 
   generate(ship: any) {
@@ -229,13 +273,112 @@ export class BoardComponent implements OnInit {
     console.log('dragend')
   }
 
-  // playGame() {
-  //   if (this.isGameOver) return
-  //   if (this.currentPlayer === 'user') {
-  //     this.turnDisplay.innerHTML = 'Your Turn'
-  //     this.computerSquares.forEach((square: any) => square.addEventListener('click', function(e) {
-  //       revealSquare(square)
-  //     }))
-  //   }
-  // }
+  playGame() {
+    if (this.isGameOver) {
+      console.log("game broke")
+      return
+    }
+    else if (this.currentPlayer === 'user') {
+      console.log("my turn")
+      this.turnDisplay.innerHTML = 'Your Turn'
+      this.computerSquares.forEach((square: any) => square.addEventListener('click', (e: any) => {
+        this.revealSquare(square)
+      }))
+    }
+    else if (this.currentPlayer === 'computer') {
+      this.turnDisplay.innerHTML = 'Computers Turn'
+      setTimeout(this.computerGo, 1000)
+    }
+  }
+
+  revealSquare(square: any) {
+    if (!square.classList.contains('hit')) {
+      if (square.classList.contains('destroyer')) this.destroyerCount++
+      else if (square.classList.contains('submarine')) this.submarineCount++
+      else if (square.classList.contains('cruiser')) this.cruiserCount++
+      else if (square.classList.contains('battleship')) this.battleshipCount++
+      else if (square.classList.contains('carrier')) this.carrierCount++
+    }
+    else if (square.classList.contains('taken')) {
+      square.classList.add('hit')
+    }
+    else {
+      square.classList.add('miss')
+    }
+
+    this.checkForWins()
+    this.currentPlayer = 'computer'
+    this.playGame()
+  }
+
+  computerGo() {
+    let random = Math.floor(Math.random() * this.userSquares.length)
+    if (!this.userSquares[random].classList.contains('hit')) {
+      this.userSquares[random].classList.add('hit')
+      if (this.userSquares[random].classList.contains('destroyer')) this.cpuDestroyerCount++
+      if (this.userSquares[random].classList.contains('submarine')) this.cpuSubmarineCount++
+      if (this.userSquares[random].classList.contains('cruiser')) this.cpuCruiserCount++
+      if (this.userSquares[random].classList.contains('battleship')) this.cpuBattleshipCount++
+      if (this.userSquares[random].classList.contains('carrier')) this.cpuCarrierCount++
+      this.checkForWins()
+    } else this.computerGo()
+    this.currentPlayer = 'user'
+    this.turnDisplay.innerHTML = 'Your Go'
+  }
+
+  checkForWins() {
+    if (this.destroyerCount === 2) {
+      this.infoDisplay.innerHTML = 'You sunk the computers destroyer'
+      this.destroyerCount = 10
+    }
+    if (this.submarineCount === 3) {
+      this.infoDisplay.innerHTML = 'You sunk the computers submarine'
+      this.submarineCount = 10
+    }
+    if (this.cruiserCount === 3) {
+      this.infoDisplay.innerHTML = 'You sunk the computers cruiser'
+      this.cruiserCount = 10
+    }
+    if (this.battleshipCount === 4) {
+      this.infoDisplay.innerHTML = 'You sunk the computers battleship'
+      this.battleshipCount = 10
+    }
+    if (this.carrierCount === 5) {
+      this.infoDisplay.innerHTML = 'You sunk the computers carrier'
+      this.carrierCount = 10
+    }
+    if (this.cpuDestroyerCount === 2) {
+      this.infoDisplay.innerHTML = 'You sunk the computers Destroyer'
+      this.cpuDestroyerCount = 10
+    }
+    if (this.cpuSubmarineCount === 3) {
+      this.infoDisplay.innerHTML = 'You sunk the computers Submarine'
+      this.cpuSubmarineCount = 10
+    }
+    if (this.cpuCruiserCount === 3) {
+      this.infoDisplay.innerHTML = 'You sunk the computers Cruiser'
+      this.cpuCruiserCount = 10
+    }
+    if (this.cpuBattleshipCount === 4) {
+      this.infoDisplay.innerHTML = 'You sunk the computers Battleship'
+      this.cpuBattleshipCount = 10
+    }
+    if (this.cpuCarrierCount === 5) {
+      this.infoDisplay.innerHTML = 'You sunk the computers Carrier'
+      this.cpuCarrierCount = 10
+    }
+    if ((this.destroyerCount + this.submarineCount + this.cruiserCount + this.battleshipCount + this.carrierCount) === 50) {
+      this.infoDisplay.innerHTML = "YOU WIN"
+      this.gameOver()
+    }
+    if ((this.cpuDestroyerCount + this.cpuSubmarineCount + this.cpuCruiserCount + this.cpuBattleshipCount + this.cpuCarrierCount) === 50) {
+      this.infoDisplay.innerHTML = "COMPUTER WINS"
+      this.gameOver()
+    }
+  }
+
+  gameOver() {
+    this.isGameOver = true
+    this.startButton.removeEventListener('click', this.playGame)
+  }
 }
