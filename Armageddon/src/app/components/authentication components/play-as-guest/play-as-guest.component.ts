@@ -43,6 +43,6 @@ export class PlayAsGuestComponent implements OnInit {
       this.router.navigateByUrl(`home/${this.user.username}`);
     });*/
     
-    this.router.navigateByUrl(`home/${this.user.username}`);
+    this.router.navigateByUrl(`home`);
   }
 }

@@ -16,6 +16,7 @@ import { PlayAsGuestComponent } from './components/authentication components/pla
 import { TitleCardComponent } from './components/Title/title-card/title-card.component';
 import { LeaderboardComponent } from './components/Title/leaderboard/leaderboard.component';
 import { HomeComponent } from './pages/home/home.component';
+import { FriendListComponent } from './friend-list/friend-list.component';
 /*import { GoHomeComponent } from './components/authentication components/go-home-button';*/
 
 @NgModule({
@@ -30,7 +31,8 @@ import { HomeComponent } from './pages/home/home.component';
     PlayAsGuestComponent,
     TitleCardComponent,
     LeaderboardComponent,
-    HomeComponent
+    HomeComponent,
+    FriendListComponent
   ],
   imports: [
     BrowserModule,

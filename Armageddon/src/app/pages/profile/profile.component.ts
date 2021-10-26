@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
   }
 
   goToHome() {
-    this.router.navigateByUrl(`home/test`);
+    this.router.navigateByUrl(`home`);
   }
 
 }
