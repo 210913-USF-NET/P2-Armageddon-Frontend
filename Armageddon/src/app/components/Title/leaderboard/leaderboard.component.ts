@@ -12,12 +12,13 @@ export class LeaderboardComponent implements OnInit {
 
   constructor(private armageddonService: ArmageddonApiService) { }
 
+  AMOUNT: number = 5;
   users: user[] = [];
 
   ngOnInit(): void {
     this.armageddonService.getAllUsers().then(result => {
       result.sort((a, b) => (a.totalWins < b.totalWins) ? 1 : -1);
-      this.users = result.slice(0, 5);
+      result.splice(this.AMOUNT);
     })
   }
 

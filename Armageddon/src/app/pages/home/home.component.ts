@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   user: user = {
     id: 0,
     username: '',
-    password: '',
+    email: '',
     winStreak: 0,
     shotStreak: 0,
     totalWins: 0,
