@@ -1,4 +1,4 @@
-.btn{
+.btns{
     background-color:white;
     border-radius:0;
 }
@@ -72,4 +72,14 @@
 
 .active{
     background-color:lightgray;
+}
+
+.btns{
+    text-align:center;
+}
+.btn1{
+    padding-right:35px;
+}
+.btn2 {
+  padding-left: 35px;
 }

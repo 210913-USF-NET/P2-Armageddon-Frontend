@@ -5,28 +5,35 @@ import { user } from 'src/app/models/user';
 
 @Injectable({ providedIn: 'root' })
 export class TalkService {
-  private currentUser: Talk.User;
+  private currentUser: Talk.User = {
+    id: "1",
+    name: 'Sebastienas',
+    email: 'sebastian@allparts.com',
+    photoUrl: 'https://randomuser.me/api/portraits/men/71.jpg',
+    role: 'default'
+  };
   user$:any;
   constructor(private auth: AuthService) {
-    this.auth.user$.subscribe((user:any) => {
-      this.user$ = user;
-    })
+    this.user$ = this.currentUser;
   }
 
   async createUser(applicationUser: any) {
     await Talk.ready;
     console.log(this.user$);
     return new Talk.User({
-      id: applicationUser.id,
-      name: applicationUser.username
+      id: "1",
+      name: 'Sebastienas',
+      email: 'sebastian@allparts.com',
+      photoUrl: 'https://randomuser.me/api/portraits/men/71.jpg',
+      role: 'default'
     });
   }
 
   async createCurrentSession() {
     await Talk.ready;
     const user = {
-      id: this.user$.uid,
-      username: this.user$.displayName,
+      id: this.user$.id,
+      name: this.user$.name,
       email: this.user$.email,
       photoUrl: this.user$.photoURL,
       role: 'default'
@@ -52,8 +59,8 @@ export class TalkService {
 
   async createPopup(session: Talk.Session) {
     const supportUser = {
-      id: 5,
-      username: 'Sebastien',
+      id: "5",
+      name: 'Sebastien',
       email: 'sebastian@allparts.com',
       photoUrl: 'https://randomuser.me/api/portraits/men/71.jpg',
       role: 'default'

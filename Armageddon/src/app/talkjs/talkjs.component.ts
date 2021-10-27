@@ -10,17 +10,21 @@ import { TalkService } from 'src/app/service/talk.service';
   styleUrls: ['./talkjs.component.css']
 })
 export class TalkjsComponent implements OnInit {
-  private popup: Talk.Popup;
-  private session: Talk.Session;
-  @ViewChild('talkjsContainer') talkjsContainer!: ElementRef;
+  private popup!: Talk.Popup;
+  private session!: Talk.Session;
+  @ViewChild('talkjsContainer', { static: true }) talkjsContainer!: ElementRef;
   constructor(private talkService: TalkService, public auth: AuthService) {
   }
   ngOnInit(): void {
+    //this.createPopup();
+  }
+  ngAfterContentInit() {
     this.createPopup();
   }
   private async createPopup() {
     const session = await this.talkService.createCurrentSession();
     this.popup = await this.talkService.createPopup(session);
-    this.popup.mount(this.talkjsContainer.nativeElement);
+    
+    //this.popup.mount(this.talkjsContainer.nativeElement);
   }
 }
