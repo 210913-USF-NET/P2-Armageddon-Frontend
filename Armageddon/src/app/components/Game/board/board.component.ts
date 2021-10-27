@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from '@auth0/auth0-spa-js';
+import { Component, OnInit, Directive, Renderer2, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-board',
@@ -44,32 +43,34 @@ export class BoardComponent implements OnInit {
   cpuCruiserCount: any
   cpuBattleshipCount: any
   cpuCarrierCount: any
+  rotateButton: any
+  square: any
+  component: any
 
-  constructor() { }
+  gridLocation: any
+
+  constructor(private renderer: Renderer2, private el: ElementRef) { }
 
   ngOnInit(): void {
     this.userGrid = document.querySelector('.grid-user')
     this.computerGrid = document.querySelector('.grid-computer')
     this.displayGrid = document.querySelector('.grid-display')
-
     this.ships = document.querySelectorAll('.ship')
     this.destroyer = document.querySelector('.destroyer-container')
     this.submarine = document.querySelector('.submarine-container')
     this.cruiser = document.querySelector('.cruiser-container')
     this.battleship = document.querySelector('.battleship-container')
     this.carrier = document.querySelector('.carrier-container')
-
     this.startButton = document.querySelector('#start')
+    this.rotateButton = document.querySelector('#rotate')
     this.turnDisplay = document.querySelector('#whose-go')
     this.infoDisplay = document.querySelector('#info')
-
     this.userSquares = []
     this.computerSquares = []
-    this.width = 10
-
     this.isHorizontal = true
     this.isGameOver = false
     this.currentPlayer = 'user'
+    this.width = 10
 
     this.destroyerCount = 0
     this.submarineCount = 0
@@ -121,14 +122,8 @@ export class BoardComponent implements OnInit {
       },
     ]
 
-    this.createBoard(this.userGrid, this.userSquares)
-    this.createBoard(this.computerGrid, this.computerSquares)
-
-    this.generateUser(this.shipArray[0])
-    this.generateUser(this.shipArray[1])
-    this.generateUser(this.shipArray[2])
-    this.generateUser(this.shipArray[3])
-    this.generateUser(this.shipArray[4])
+    this.createBoard(this.userGrid)
+    this.createBoardCpu(this.computerGrid)
 
     this.generate(this.shipArray[0])
     this.generate(this.shipArray[1])
@@ -136,42 +131,36 @@ export class BoardComponent implements OnInit {
     this.generate(this.shipArray[3])
     this.generate(this.shipArray[4])
 
-    this.ships.forEach((ship: any) => ship.addEventListener('dragstart', this.dragStart))
-    this.userSquares.forEach((square: any) => square.addEventListener('dragstart', this.dragStart))
-    this.userSquares.forEach((square: any) => square.addEventListener('dragover', this.dragOver))
-    this.userSquares.forEach((square: any) => square.addEventListener('dragenter', this.dragEnter))
-    this.userSquares.forEach((square: any) => square.addEventListener('dragleave', this.dragLeave))
-    this.userSquares.forEach((square: any) => square.addEventListener('drop', this.dragDrop))
-    this.userSquares.forEach((square: any) => square.addEventListener('dragend', this.dragEnd))
+    this.ships.forEach((ship: any) => this.renderer.listen(ship, "dragstart", (event: any) => this.dragStart(event)).bind(this))
+    this.userSquares.forEach((square: any) => square.addEventListener('dragstart', this.dragStart.bind(this)))
+    this.userSquares.forEach((square: any) => square.addEventListener('dragover', this.dragOver.bind(this)))
+    this.userSquares.forEach((square: any) => square.addEventListener('dragenter', this.dragEnter.bind(this)))
+    this.userSquares.forEach((square: any) => square.addEventListener('dragleave', this.dragLeave.bind(this)))
+    this.userSquares.forEach((square: any) => square.addEventListener('drop', this.dragDrop.bind(this)))
+    this.userSquares.forEach((square: any) => square.addEventListener('dragend', this.dragEnd.bind(this)))
 
     this.ships.forEach((ship: any) => ship.addEventListener('mousedown', ((e: any) => {
       this.selectedShipNameWithIndex = e.target.id
       // console.log(this.selectedShipNameWithIndex)
-    })))
+    }).bind(this)))
   }
 
-  createBoard(grid: any, squares: any) {
+  createBoard(grid: any) {
     for (let i = 0; i < this.width * this.width; i++) {
-      const square = document.createElement('div')
-      square.dataset.id = i.toString()
-      grid.appendChild(square)
-      squares.push(square)
+      this.square = document.createElement('div')
+      this.square.dataset.id = i.toString()
+      grid.appendChild(this.square)
+      this.userSquares.push(this.square)
     }
   }
 
-  generateUser(ship: any) {
-    let randomDirection = Math.floor(Math.random() * ship.directions.length)
-    let current = ship.directions[randomDirection]
-    if (randomDirection === 0) this.direction = 1
-    if (randomDirection === 1) this.direction = 10
-    let randomStart = Math.abs(Math.floor(Math.random() * this.userSquares.length - (ship.directions[0].length * this.direction)))
-
-    const isTaken = current.some((index: any) => this.userSquares[randomStart + index].classList.contains('taken'))
-    const isAtRightEdge = current.some((index: any) => (randomStart + index) % this.width === this.width - 1)
-    const isAtLeftEdge = current.some((index: any) => (randomStart + index) % this.width === 0)
-
-    if (!isTaken && !isAtRightEdge && !isAtLeftEdge) current.forEach((index: any) => this.userSquares[randomStart + index].classList.add('taken', ship.name))
-    else this.generateUser(ship)
+  createBoardCpu(grid: any) {
+    for (let i = 0; i < this.width * this.width; i++) {
+      this.square = document.createElement('div')
+      this.square.dataset.id = i.toString()
+      grid.appendChild(this.square)
+      this.computerSquares.push(this.square)
+    }
   }
 
   generate(ship: any) {
@@ -212,12 +201,12 @@ export class BoardComponent implements OnInit {
   }
 
   dragStart(e: any) {
-    this.draggedShip = e.target.id
-    console.log(e.target)
-    this.draggedShipLength = this.childNodes.length
+    this.draggedShip = e.target
+    this.draggedShipLength = this.draggedShip.childNodes.length
     console.log("drag start")
-    console.log(this.draggedShip)
-    console.log(this)
+    // console.log(e.target)
+    // console.log(this)
+    // console.log(this.draggedShip)
   }
 
   dragOver(e: any) {
@@ -226,6 +215,7 @@ export class BoardComponent implements OnInit {
 
   dragEnter(e: any) {
     e.preventDefault()
+    this.gridLocation = e.target.dataset.id
   }
 
   dragLeave() {
@@ -233,15 +223,10 @@ export class BoardComponent implements OnInit {
   }
 
   dragDrop(e: Event) {
-    console.log(this.draggedShip)
-    console.log(this)
     let shipNameWithLastId = this.draggedShip.lastChild.id
     let shipClass = shipNameWithLastId.slice(0, -2)
-    console.log(shipClass)
     let lastShipIndex = parseInt(shipNameWithLastId.substr(-1))
-    let shipLastId = lastShipIndex
-    //+ parseInt(this.dataset.id)
-    console.log(shipLastId)
+    let shipLastId = lastShipIndex + parseInt(this.gridLocation)
     const notAllowedHorizontal = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 1, 11, 21, 31, 41, 51, 61, 71, 81, 91, 2, 22, 32, 42, 52, 62, 72, 82, 92, 3, 13, 23, 33, 43, 53, 63, 73, 83, 93]
     const notAllowedVertical = [99, 98, 97, 96, 95, 94, 93, 92, 91, 90, 89, 88, 87, 86, 85, 84, 83, 82, 81, 80, 79, 78, 77, 76, 75, 74, 73, 72, 71, 70, 69, 68, 67, 66, 65, 64, 63, 62, 61, 60]
 
@@ -251,22 +236,23 @@ export class BoardComponent implements OnInit {
     this.selectedShipIndex = parseInt(this.selectedShipNameWithIndex.substr(-1))
 
     shipLastId = shipLastId - this.selectedShipIndex
-    console.log(shipLastId)
 
     if (this.isHorizontal && !newNotAllowedHorizontal.includes(shipLastId)) {
       for (let i = 0; i < this.draggedShipLength; i++) {
-        this.userSquares[/*parseInt(this.dataset.id) - */this.selectedShipIndex + i].classList.add('taken', shipClass)
+        console.log(this.square.dataset.id)
+        console.log("-----------")
+        console.log(this.userSquares[i].dataset.id)
+        this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex + i].classList.add('taken', shipClass)
       }
       //As long as the index of the ship you are dragging is not in the newNotAllowedVertical array! This means that sometimes if you drag the ship by its
       //index-1 , index-2 and so on, the ship will rebound back to the displayGrid.
     } else if (!this.isHorizontal && !newNotAllowedVertical.includes(shipLastId)) {
       for (let i = 0; i < this.draggedShipLength; i++) {
-        this.userSquares[/*parseInt(this.dataset.id) - */this.selectedShipIndex + this.width * i].classList.add('taken', shipClass)
+        this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex + this.width * i].classList.add('taken', shipClass)
       }
     } else return
 
     this.displayGrid.removeChild(this.draggedShip)
-    console.log('drag drop')
   }
 
   dragEnd() {
@@ -287,19 +273,19 @@ export class BoardComponent implements OnInit {
     }
     else if (this.currentPlayer === 'computer') {
       this.turnDisplay.innerHTML = 'Computers Turn'
-      setTimeout(this.computerGo, 1000)
+      this.computerGo()
     }
   }
 
   revealSquare(square: any) {
     if (!square.classList.contains('hit')) {
       if (square.classList.contains('destroyer')) this.destroyerCount++
-      else if (square.classList.contains('submarine')) this.submarineCount++
-      else if (square.classList.contains('cruiser')) this.cruiserCount++
-      else if (square.classList.contains('battleship')) this.battleshipCount++
-      else if (square.classList.contains('carrier')) this.carrierCount++
+      if (square.classList.contains('submarine')) this.submarineCount++
+      if (square.classList.contains('cruiser')) this.cruiserCount++
+      if (square.classList.contains('battleship')) this.battleshipCount++
+      if (square.classList.contains('carrier')) this.carrierCount++
     }
-    else if (square.classList.contains('taken')) {
+    if (square.classList.contains('taken')) {
       square.classList.add('hit')
     }
     else {
