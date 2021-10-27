@@ -4,32 +4,30 @@ import { HomeComponent } from './pages/home/home.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { AuthGuard } from '@auth0/auth0-angular';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { LobbyComponent } from './pages/lobby/lobby.component';
 import { BoardComponent } from './components/Game/board/board.component';
 
 const routes: Routes = [
 
-  {
-    path: 'profile',
-    component: ProfileComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-     path: 'home/:name',
-     component: HomeComponent
-  },
-  {
-   path: '',
-   component: LandingComponent
-  },
   {
     path: 'profile/:name',
     component: ProfileComponent,
     canActivate: [AuthGuard]
   },
   {
+    path: 'home/:name',
+    component: LobbyComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'board',
     component: BoardComponent,
+  },
+  {
+   path: '',
+   component: LandingComponent
   }
+  
 ];
 
 @NgModule({

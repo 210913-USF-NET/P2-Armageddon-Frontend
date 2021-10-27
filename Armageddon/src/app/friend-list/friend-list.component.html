@@ -1,0 +1,43 @@
+<div class="w-25 p-3" *ngIf="auth.user$ | async as user" style="text-align:center">
+
+  <ul class="list-group">
+    <h3 class="list-group-item">Friend List</h3>
+    <li class="list-group-item" *ngIf="friendusers.length==0">you poor man have no friend</li>
+    <li class="list-group-item" *ngFor="let friend of friendusers;let i=index" (click)="select(i)" 
+       [ngClass]="{'active': selectedIndex == i, 'list-group-item': true}">{{friend.username}}</li>
+
+    <li class="list-group-item form-inline btns">
+      <a class="btn btn1" (click)="popup=true;select(-1)" role="button">Add Friend</a>
+      <a class="btn btn2" *ngIf="friendusers.length!=0" (click)="popupd=true;select(-1)" role="button">Delete Friend</a>
+      <a class="btn btn2" *ngIf="friendusers.length==0" (click)="noFriend();select(-1)" role="button">Delete Friend</a>
+    </li>
+  </ul>
+  
+</div>
+
+<div class="overlay" *ngIf="popup">
+  <div class="popup">
+    <h2>Add Friend</h2>
+    <div class="content">
+      <label for="username">Enter user name:</label>
+      <input class="form-control" type="text" name="username" id="friendname" placeholder="username" #friendname/>
+    </div>
+    <a class="close" (click)="popup = false">&times;</a>
+    <a class="btn submit" (click)="addFriend(friendname.value)" role="button">Add</a>
+  </div>
+</div>
+
+<div class="overlay" *ngIf="popupd">
+  <div class="popup">
+    <h2>Delete Friend</h2>
+    <div class="content">
+      <label for="username">Select a Poor Friend:</label>
+      <select name="friendname" [(ngModel)]="friendname">
+        <option *ngFor="let friend of friendusers;let i=index">{{friend.username}}</option>
+      </select>
+    </div>
+    <a class="close" (click)="popupd = false">&times;</a>
+    <a class="btn submit" (click)="deleteFriend(friendname)" role="button">Delete</a>
+  </div>
+</div>
+

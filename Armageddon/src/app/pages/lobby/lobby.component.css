@@ -1,0 +1,115 @@
+div {
+    background-color: LightGray;
+    text-align:center;
+    border-radius:8px;
+  }
+  .username-box {
+      position:absolute;left:200px; top:50px;
+      width:550px;
+      height:100px;
+      padding-top: 20px;
+  }
+  .greeting {
+    font-size: 30px;
+    padding: 35px;
+  }
+  .gamelink {
+    position: absolute;
+    left: 200px;
+    top: 175px;
+    width: 250px;
+    height: 50px;
+    line-height: 50px;
+  }
+  .ready {
+    position: absolute;
+    left: 500px;
+    top: 175px;
+    width: 250px;
+    height: 50px;
+    line-height: 50px;
+  }
+  .ships {
+    position: absolute;
+    left: 100px;
+    top: 250px;
+    width: 200px;
+    height: 300px;
+    line-height: 100px;
+  }
+  .layout {
+    position: absolute;
+    left: 350px;
+    top: 250px;
+    width: 300px;
+    height: 300px;
+    line-height: 100px;
+  }
+  .rotate {
+    position: absolute;
+    left: 700px;
+    top: 250px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+  }
+  .random {
+    position: absolute;
+    left: 700px;
+    top: 350px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+  }
+  .clear {
+    position: absolute;
+    left: 700px;
+    top: 450px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+  }
+  .usedefault {
+    position: absolute;
+    left: 250px;
+    top: 600px;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+  }
+  .savedefault {
+    position: absolute;
+    left: 500px;
+    top: 600px;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+  }
+  .profile {
+    position: absolute;
+    left: 200px;
+    top: 700px;
+    width: 500px;
+    height: 110px;
+  }
+  .leaderboard {
+    position: absolute;
+    left: 800px;
+    top: 50px;
+    width: 500px;
+    height: 350px;
+  }
+  .lobbychat {
+    position: absolute;
+    left: 800px;
+    top: 450px;
+    width: 500px;
+    height: 350px;
+  }
+
+  .lobbychat h2{
+      margin:0;
+      margin-top:5px;
+      
+  }
+  

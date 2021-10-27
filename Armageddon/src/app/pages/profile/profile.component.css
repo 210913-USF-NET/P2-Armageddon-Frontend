@@ -69,6 +69,7 @@
   height: 125px;
   opacity:0.7;
   text-align:center;
+  border-radius:5px;
 }
 .totalmatch {
   position: absolute;
@@ -77,24 +78,20 @@
 }
 .totalwin {
   position: absolute;
-  right: 400px;
+  left: 800px;
   top: 300px;
 }
 .winsteak {
   position: absolute;
   left: 400px;
-  bottom: 100px;
+  top: 500px;
 }
 .shotstreak {
   position: absolute;
-  right: 400px;
-  bottom: 100px;
+  left: 800px;
+  top: 500px;
 }
 h4{
     margin-top:10px;
     margin-bottom:20px;
 }
-
-
-
-
