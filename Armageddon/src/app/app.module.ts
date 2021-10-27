@@ -20,6 +20,9 @@ import { LobbyComponent } from './pages/lobby/lobby.component';
 import { ProfilebuttonComponent } from './components/Lobby/profilebutton/profilebutton.component';
 import { HomeComponent } from './pages/home/home.component';
 import { FriendListComponent } from './friend-list/friend-list.component';
+import { TalkjsComponent } from '../app/talkjs/talkjs.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChatComponent } from './components/Lobby/chat/chat.component';
 /*import { GoHomeComponent } from './components/authentication components/go-home-button';*/
 
 @NgModule({
@@ -39,6 +42,8 @@ import { FriendListComponent } from './friend-list/friend-list.component';
     PlayButtonComponent,
     LobbyComponent,
     ProfilebuttonComponent,
+    TalkjsComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +53,8 @@ import { FriendListComponent } from './friend-list/friend-list.component';
     AuthModule.forRoot({
       domain: environment.authDomain,
       clientId: environment.authClientId
-    })
+    }),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

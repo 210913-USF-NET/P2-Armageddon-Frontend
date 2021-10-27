@@ -6,7 +6,10 @@ export const environment = {
   production: false,
   bsAPIUrl: 'https://armageddonapi.azurewebsites.net/api',
   authDomain: 'dev-9prkqivq.us.auth0.com',
-  authClientId: 'THxpSzDld5aeNgJXovot3N6NJr3zq14u'
+  authClientId: 'THxpSzDld5aeNgJXovot3N6NJr3zq14u',
+  appId: '196463e045695ea2',
+  apiKey: '2ec52041ec74da7de8954de75233609f5955b0a9',
+  groupId: 'supergroup'
 };
 
 /*

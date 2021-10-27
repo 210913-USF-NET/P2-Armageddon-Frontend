@@ -5,6 +5,8 @@ import { friends } from '../models/friends';
 import { AuthService } from '@auth0/auth0-angular';
 import { NgForm, NgModel } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ProfileComponent } from '../pages/profile/profile.component';
+
 @Component({
   selector: 'app-friend-list',
   templateUrl: './friend-list.component.html',
@@ -12,7 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class FriendListComponent implements OnInit {
 
-  constructor(private armageddonService: ArmageddonApiService, public auth: AuthService, private currentRoute: ActivatedRoute, private router: Router) { }
+  constructor(private armageddonService: ArmageddonApiService, public auth: AuthService, private currentRoute: ActivatedRoute, private router: Router, public p: ProfileComponent) { }
   user: user = {
     id: 1,
     username: '',
@@ -49,7 +51,7 @@ export class FriendListComponent implements OnInit {
   ngOnInit(): void {
     //get friend list by id, u need to get current user id and parse it to parameter
     //Im unable to get current user info, i just use user 1 as test, you can update it later
-    this.armageddonService.getFriendListById(1).then(async result => {
+    this.armageddonService.getFriendListById(this.p.user.id).then(async result => {
       this.friends = result;
       if (this.friends.length != 0) {
         for (var i = 0; i < this.friends.length; i++) {
@@ -74,23 +76,29 @@ export class FriendListComponent implements OnInit {
   addFriend(friendname: string) {
 
     this.armageddonService.getUserByName(friendname).then((res) => {
+      if (!res) {
+        alert('Dear user, I believe there is not such username in our database.');
+      } else {
         this.userfriend = res;
         //I hard code 1 as the first user id, it should be current user id
-        this.friend.user1Id = 1;
-      this.friend.user2Id = res.id;
-      if (!this.friendsId.includes(this.friend.user2Id)) {
-        this.armageddonService.addFriend(this.friend).then((res) => {
-          alert('friend added successfully!')
-          window.location.reload();
-        });
-      } else {
-        alert("Dear user, I believe you two are friends already");
+        this.friend.user1Id = this.p.user.id;
+        this.friend.user2Id = res.id;
+        if (!this.friendsId.includes(this.friend.user2Id)) {
+          this.armageddonService.addFriend(this.friend).then((res) => {
+            alert('friend added successfully!')
+            window.location.reload();
+          });
+        } else {
+          alert("Dear user, I believe you two are friends already");
+        }
       }
-   
-    }, (res) => alert('Dear user, I believe there is not such username in our database.'));
+    }, (err) => alert('Dear user, I believe there is not such username in our database.'));
     
   }
 
+  noFriend() {
+    alert('bro, you have no friend');
+  }
   deleteFriend(friendname: string) {
     
     let response = confirm(`do you really want to delete ${friendname}?`).valueOf()
