@@ -3,6 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { user } from '../models/user';
 import { environment } from 'src/environments/environment';
 import { friends } from '../models/friends';
+import { chatHistory } from '../models/chatHistory';
+import { layout } from '../models/layOut';
+import { match } from '../models/match';
+import { turn } from '../models/turn';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +26,7 @@ export class ArmageddonApiService {
 
   }
 
+  // Users
   getUserById(id: number): Promise<user> {
     return this.http.get<user>(this.rootUrl + "/user/id/" + id).toPromise();
   }
@@ -34,6 +39,8 @@ export class ArmageddonApiService {
     return this.http.post<user>(this.rootUrl + "/user/", user).toPromise();
   }
 
+
+  // friends
   getFriendListById(id: number):Promise<friends[]> {
     return this.http.get<[]>(this.rootUrl + "/friends/"+id).toPromise();
   }
@@ -42,5 +49,31 @@ export class ArmageddonApiService {
   }
   deleteFriend(id:number): Promise<void> {
     return this.http.delete<void>(this.rootUrl + "/friends/"+id).toPromise();
+  }
+
+  // chat history
+  addChatHistory(chat:chatHistory):Promise<chatHistory> {
+    return this.http.post<chatHistory>(this.rootUrl + "/chatHistory/", chat).toPromise();
+  }
+
+  // layout
+  addLayout(layout:layout):Promise<layout> {
+    return this.http.post<layout>(this.rootUrl + "/layout/", layout).toPromise();
+  }
+  getLayoutById(id: number):Promise<friends[]> {
+    return this.http.get<[]>(this.rootUrl + "/layout/"+id).toPromise();
+  }
+  
+  // matches
+  addMatch(match:match):Promise<match> {
+    return this.http.post<match>(this.rootUrl + "/match/", match).toPromise();
+  }
+  
+  // turns
+  addTurn(turn:turn):Promise<turn> {
+    return this.http.post<turn>(this.rootUrl + "/turn/", turn).toPromise();
+  }
+  getTurnById(id: number):Promise<friends[]> {
+    return this.http.get<[]>(this.rootUrl + "/turn/"+id).toPromise();
   }
 }
