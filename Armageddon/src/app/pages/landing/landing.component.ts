@@ -4,6 +4,7 @@ import { ArmageddonApiService } from 'src/app/service/armageddon-api.service';
 import { user } from '../../models/user';
 import { AuthService } from '@auth0/auth0-angular';
 import { getMissingNgModuleMetadataErrorData } from '@angular/compiler';
+import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 
 @Component({
   selector: 'app-landing',
@@ -12,6 +13,8 @@ import { getMissingNgModuleMetadataErrorData } from '@angular/compiler';
 })
 export class LandingComponent implements OnInit {
   profileJson: string = '';
+  x: HubConnection | undefined;
+  _hubConnection: signalR.HubConnection | undefined;
 
   id = 0;
   user: user = {
@@ -42,42 +45,23 @@ export class LandingComponent implements OnInit {
       (profile) => (this.profileJson = JSON.stringify(profile, null, 2)),
     );
 
-    // this.auth.user$.subscribe(
-    //   (profile) => (this.loggedInUser.username = profile!.nickname!,
-    //                 this.loggedInUser.email = profile!.email!)
-    // );
+    console.log("Trying hub connections...");
+
+    let _hubConnection = new HubConnectionBuilder().withUrl('https://localhost:44340/api/message');
     
-    // this.auth.user$.subscribe(
-    //   (profile) => (this.bsService.getUserByName(this.loggedInUser.username).then((value: user) => {
-    //     // success
-    //     if (value != null)
-    //     {
-    //       this.loggedInUser.id = value.id;
-    //       this.loggedInUser.shotStreak = value.shotStreak;
-    //       this.loggedInUser.totalMatches = value.totalMatches;
-    //       this.loggedInUser.totalWins = value.totalWins;
-    //       this.loggedInUser.winStreak = value.winStreak;
-    //     }
-    //     else {
-    //       this.bsService.addUser(this.loggedInUser).then((res) => {
-    //         alert('Welcome!');
-    //       });
-    //     }
-    //   },)
-    // ));
-    //
-    // console.log(this.loggedInUser)
+    this._hubConnection?.on('send', data => {
+      console.log(data);
+    })
     
+    this._hubConnection?.start().then(() =>
+      this._hubConnection?.invoke('send', 'Hello, New Connection'))
+      .catch(err => console.log('Error while starting connection: ' + err))
+      .finally(() => console.log("Tried to connect."));
+    
+    console.log("Finished hub connections...");
     }
 
-  // google onload attribute!
-  // This section needs to be in the html. Also needs to be turned into an input-thing that autosends. 
-  // <div *ngIf="auth.user$ | async as user">
-  //   <button (click)="Data(profileJson)"></button>
-  // </div>
-  //
-  // this collects said data in the TS
-  // Data(D:any): void {
-  //     console.log(D)
-  // }
+  Test(): void {
+    this._hubConnection?.invoke('send', "The button was pressed somewhere.");
+  }
 }
