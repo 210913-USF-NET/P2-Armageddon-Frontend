@@ -1,6 +1,6 @@
 <div class = 'chat' *ngIf="auth.user$ | async as user">
   <div class="ud-body">
-    <div class="msg-box">
+    <div class="msg-box" #scrollMe>
       <ul>
         <li *ngFor="let mObj of msgInboxArray" [ngClass]="mObj.user === msgDto.user ? 'in-msg' : 'ex-msg'">{{mObj.user}} :<br /><span class="msg-italic-style">{{mObj.msgText}}</span></li>
       </ul>
