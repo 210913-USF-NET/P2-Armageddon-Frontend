@@ -27,6 +27,8 @@ export class LobbyComponent implements OnInit {
 
   AMOUNT: number = 10;
   users: user[] = []
+  declare profileJson: string
+  declare username: string
 
   ngOnInit(): void {
     // window.location.href.slice(27)
@@ -38,16 +40,32 @@ export class LobbyComponent implements OnInit {
       this.users = result;
     })
 
-    console.log(window.location.href.slice(27));
-    this.bsService.getUserByName(window.location.href.slice(27)).then((value) => {
-      this.user.id = value.id;
-      this.user.username = value.username;
-      this.user.email = value.email;
-      this.user.winStreak = value.winStreak;
-      this.user.shotStreak = value.shotStreak;
-      this.user.totalWins = value.totalWins;
-      this.user.totalMatches = value.totalMatches;
-    });
+    this.auth.user$.subscribe(
+      (profile) => {
+        this.profileJson = JSON.stringify(profile, null, 2);
+        let obj = JSON.parse(this.profileJson);
+        this.username = obj.nickname;
 
+        this.bsService.getUserByName(this.username).then((value) => {
+          this.user.id = value.id;
+          this.user.username = value.username;
+          this.user.email = value.email;
+          this.user.winStreak = value.winStreak;
+          this.user.shotStreak = value.shotStreak;
+          this.user.totalWins = value.totalWins;
+          this.user.totalMatches = value.totalMatches;
+        });
+      });
+
+    // console.log(window.location.href.slice(27));
+    // this.bsService.getUserByName(window.location.href.slice(27)).then((value) => {
+    //   this.user.id = value.id;
+    //   this.user.username = value.username;
+    //   this.user.email = value.email;
+    //   this.user.winStreak = value.winStreak;
+    //   this.user.shotStreak = value.shotStreak;
+    //   this.user.totalWins = value.totalWins;
+    //   this.user.totalMatches = value.totalMatches;
+    // });
   }
 }

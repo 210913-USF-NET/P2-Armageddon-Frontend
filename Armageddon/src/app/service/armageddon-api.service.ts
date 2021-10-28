@@ -60,7 +60,7 @@ export class ArmageddonApiService {
   addLayout(layout:layout):Promise<layout> {
     return this.http.post<layout>(this.rootUrl + "/layout/", layout).toPromise();
   }
-  getLayoutById(id: number):Promise<friends[]> {
+  getLayoutById(id: number):Promise<layout[]> {
     return this.http.get<[]>(this.rootUrl + "/layout/"+id).toPromise();
   }
   
@@ -68,12 +68,15 @@ export class ArmageddonApiService {
   addMatch(match:match):Promise<match> {
     return this.http.post<match>(this.rootUrl + "/match/", match).toPromise();
   }
+  getLatestMatch(): Promise<match> {
+    return this.http.get<match>(this.rootUrl + "/match/latest").toPromise();
+  }
   
   // turns
   addTurn(turn:turn):Promise<turn> {
     return this.http.post<turn>(this.rootUrl + "/turn/", turn).toPromise();
   }
-  getTurnById(id: number):Promise<friends[]> {
+  getTurnById(id: number):Promise<turn[]> {
     return this.http.get<[]>(this.rootUrl + "/turn/"+id).toPromise();
   }
 }

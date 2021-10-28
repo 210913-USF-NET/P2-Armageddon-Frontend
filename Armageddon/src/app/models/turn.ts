@@ -5,5 +5,4 @@ export interface turn{
     matchId: number;
     shotLocation: number;
     turnNumber: number;
-
 }
