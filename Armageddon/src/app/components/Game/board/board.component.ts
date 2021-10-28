@@ -181,15 +181,14 @@ export class BoardComponent implements OnInit {
     const isAtRightEdge = current.some((index: any) => (randomStart + index) % this.width === this.width - 1)
     const isAtLeftEdge = current.some((index: any) => (randomStart + index) % this.width === 0)
 
-    if (!isTaken && !isAtRightEdge && !isAtLeftEdge) 
-    {
+    if (!isTaken && !isAtRightEdge && !isAtLeftEdge) {
       current.forEach(
-        (index: any) => 
+        (index: any) =>
           this.computerSquares[randomStart + index].classList.add('taken', ship.name));
 
-      current.forEach(
-        (index: any) => 
-          this.computerSquares[randomStart + index].classList.remove('empty'));
+      // current.forEach(
+      //   (index: any) => 
+      //     this.computerSquares[randomStart + index].classList.remove('empty'));
     }
     else this.generate(ship)
   }
@@ -255,20 +254,20 @@ export class BoardComponent implements OnInit {
     let shipLastId = parseInt(this.gridLocation)
 
     if (this.isHorizontal)
-      shipLastId = (shipLastId + lastShipIndex - this.selectedShipIndex)%100
+      shipLastId = (shipLastId + lastShipIndex - this.selectedShipIndex) % 100
     else
-      shipLastId = (shipLastId + (lastShipIndex - this.selectedShipIndex)*10)%100
+      shipLastId = (shipLastId + (lastShipIndex - this.selectedShipIndex) * 10) % 100
 
     // check to make sure every spot that wants to be interacted with is empty. 
     if (this.isHorizontal && !newNotAllowedHorizontal.includes(shipLastId)) {
       for (let i = 0; i < this.draggedShipLength; i++) {
-        if(this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex + i].classList.contains('taken')) {
+        if (this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex + i].classList.contains('taken')) {
           return;
         }
       }
     } else if (!this.isHorizontal && !newNotAllowedVertical.includes(shipLastId)) {
       for (let i = 0; i < this.draggedShipLength; i++) {
-        if (this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex*10 + this.width * i].classList.contains('taken')) {
+        if (this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex * 10 + this.width * i].classList.contains('taken')) {
           return;
         }
       }
@@ -276,10 +275,10 @@ export class BoardComponent implements OnInit {
 
     if (this.isHorizontal && !newNotAllowedHorizontal.includes(shipLastId)) {
       for (let i = 0; i < this.draggedShipLength; i++) {
-        let pic:string = ''
-        if (i == 0) {pic = "HLEdge"}
-        else if (i == this.draggedShipLength-1) {pic = "HREdge"}
-        else {pic = "HCenter"}
+        let pic: string = ''
+        if (i == 0) { pic = "HLEdge" }
+        else if (i == this.draggedShipLength - 1) { pic = "HREdge" }
+        else { pic = "HCenter" }
 
         this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex + i].classList.add('taken', shipClass, pic)
         this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex + i].classList.remove('empty')
@@ -288,13 +287,13 @@ export class BoardComponent implements OnInit {
       //index-1 , index-2 and so on, the ship will rebound back to the displayGrid.
     } else if (!this.isHorizontal && !newNotAllowedVertical.includes(shipLastId)) {
       for (let i = 0; i < this.draggedShipLength; i++) {
-        let pic:string = ''
-        if (i == 0) {pic = "VTEdge"}
-        else if (i == this.draggedShipLength-1) {pic = "VBEdge"}
-        else {pic = "VCenter"}
+        let pic: string = ''
+        if (i == 0) { pic = "VTEdge" }
+        else if (i == this.draggedShipLength - 1) { pic = "VBEdge" }
+        else { pic = "VCenter" }
 
-        this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex*10 + this.width * i].classList.add('taken', shipClass, pic)
-        this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex*10 + this.width * i].classList.remove('empty')
+        this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex * 10 + this.width * i].classList.add('taken', shipClass, pic)
+        this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex * 10 + this.width * i].classList.remove('empty')
       }
     } else return
 
@@ -314,7 +313,7 @@ export class BoardComponent implements OnInit {
     else if (this.gameStarted == true) {
       console.log("The game's already in progress.")
       return
-    } 
+    }
     else {
       this.gameStarted = true;
       this.playGame()
@@ -335,17 +334,16 @@ export class BoardComponent implements OnInit {
     }
     else if (this.currentPlayer === 'computer') {
       this.turnDisplay.innerHTML = 'Computers Turn'
-      this.computerGo()
+      setTimeout(() => this.computerGo(), 500)
+      // this.computerGo()
     }
   }
 
   revealSquare(square: any) {
-    if (square.classList.contains('hit') || square.classList.contains('miss'))
-    {
+    if (square.classList.contains('hit') || square.classList.contains('miss')) {
       return;
     }
-    else if (square.classList.contains('taken'))
-    {
+    else if (square.classList.contains('taken')) {
       // increment count, mark them as HIT, end turn
       square.classList.add('hit')
       if (square.classList.contains('destroyer')) this.destroyerCount++
@@ -354,8 +352,7 @@ export class BoardComponent implements OnInit {
       if (square.classList.contains('battleship')) this.battleshipCount++
       if (square.classList.contains('carrier')) this.carrierCount++
     }
-    else if (square.classList.contains('empty'))
-    {
+    else if (square.classList.contains('empty')) {
       // mark it as miss, end turn
       square.classList.add('miss')
     }
@@ -394,7 +391,7 @@ export class BoardComponent implements OnInit {
       this.checkForWins()
     } else this.computerGo()
     this.currentPlayer = 'user'
-    this.turnDisplay.innerHTML = 'Your Go'
+    this.turnDisplay.innerHTML = 'Your Turn'
   }
 
   checkForWins() {
