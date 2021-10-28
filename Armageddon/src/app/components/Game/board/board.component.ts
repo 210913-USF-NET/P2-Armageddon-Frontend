@@ -706,20 +706,25 @@ export class BoardComponent implements OnInit {
     // Add matchId to Layouts
     // Send Layouts to DB. 
     // Send Turns to DB. 
-    this.user.totalMatches++
-    this.match.turnCount = this.counter;
-    this.armAPI.addMatch(this.match).then(
-      (match) => {
-        this.layouts.forEach(layout => {
-          layout.matchId = match.id;
-          this.armAPI.addLayout(layout)
-        });
-        this.turns.forEach(turn => {
-          turn.matchId = match.id;
-          this.armAPI.addTurn(turn)
-        });
-      }
-    )
+    if (!this.isGameOver)
+    {
+      console.log(this.user.totalMatches);
+      this.user.totalMatches++;
+      this.match.turnCount = this.counter;
+      this.armAPI.addMatch(this.match).then(
+        (match) => {
+          this.layouts.forEach(layout => {
+            layout.matchId = match.id;
+            this.armAPI.addLayout(layout)
+          });
+          this.turns.forEach(turn => {
+            turn.matchId = match.id;
+            this.armAPI.addTurn(turn)
+          });
+        }
+      )
+      this.armAPI.updateUser(this.user)
+    }
     
     this.isGameOver = true
     this.startButton.removeEventListener('click', this.playGame)
