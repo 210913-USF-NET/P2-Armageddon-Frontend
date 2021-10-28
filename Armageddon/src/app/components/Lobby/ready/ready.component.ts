@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ready',
@@ -8,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReadyComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  goToBoard(): void {
+    this.router.navigateByUrl(`board`);
   }
 
 }
