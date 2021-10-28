@@ -39,6 +39,10 @@ export class ArmageddonApiService {
     return this.http.post<user>(this.rootUrl + "/user/", user).toPromise();
   }
 
+  updateUser(user: user): Promise<user> {
+    return this.http.put<user>(this.rootUrl + "/user/" + user, user).toPromise();
+  }
+
 
   // friends
   getFriendListById(id: number):Promise<friends[]> {
