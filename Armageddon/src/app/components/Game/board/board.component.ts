@@ -3,7 +3,7 @@ import { Component, OnInit, Directive, Renderer2, ElementRef } from '@angular/co
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
-  styleUrls: [
+  styleUrls: ['./board.component.css'
   ]
 })
 export class BoardComponent implements OnInit {
@@ -33,6 +33,7 @@ export class BoardComponent implements OnInit {
   startButton: any
   turnDisplay: any
   infoDisplay: any
+  playerShipCount: any
   destroyerCount: any
   submarineCount: any
   cruiserCount: any
@@ -46,6 +47,7 @@ export class BoardComponent implements OnInit {
   rotateButton: any
   square: any
   component: any
+  gameStarted: any
 
   gridLocation: any
 
@@ -72,6 +74,7 @@ export class BoardComponent implements OnInit {
     this.currentPlayer = 'user'
     this.width = 10
 
+    this.playerShipCount = 0
     this.destroyerCount = 0
     this.submarineCount = 0
     this.cruiserCount = 0
@@ -83,6 +86,8 @@ export class BoardComponent implements OnInit {
     this.cpuCruiserCount = 0
     this.cpuBattleshipCount = 0
     this.cpuCarrierCount = 0
+
+    this.gameStarted = false
 
     this.shipArray = [
       {
@@ -149,6 +154,7 @@ export class BoardComponent implements OnInit {
     for (let i = 0; i < this.width * this.width; i++) {
       this.square = document.createElement('div')
       this.square.dataset.id = i.toString()
+      this.square.classList.add("empty")
       grid.appendChild(this.square)
       this.userSquares.push(this.square)
     }
@@ -157,6 +163,7 @@ export class BoardComponent implements OnInit {
   createBoardCpu(grid: any) {
     for (let i = 0; i < this.width * this.width; i++) {
       this.square = document.createElement('div')
+      this.square.classList.add("empty")
       this.square.dataset.id = i.toString()
       grid.appendChild(this.square)
       this.computerSquares.push(this.square)
@@ -174,7 +181,16 @@ export class BoardComponent implements OnInit {
     const isAtRightEdge = current.some((index: any) => (randomStart + index) % this.width === this.width - 1)
     const isAtLeftEdge = current.some((index: any) => (randomStart + index) % this.width === 0)
 
-    if (!isTaken && !isAtRightEdge && !isAtLeftEdge) current.forEach((index: any) => this.computerSquares[randomStart + index].classList.add('taken', ship.name))
+    if (!isTaken && !isAtRightEdge && !isAtLeftEdge) 
+    {
+      current.forEach(
+        (index: any) => 
+          this.computerSquares[randomStart + index].classList.add('taken', ship.name));
+
+      current.forEach(
+        (index: any) => 
+          this.computerSquares[randomStart + index].classList.remove('empty'));
+    }
     else this.generate(ship)
   }
 
@@ -226,42 +242,88 @@ export class BoardComponent implements OnInit {
     let shipNameWithLastId = this.draggedShip.lastChild.id
     let shipClass = shipNameWithLastId.slice(0, -2)
     let lastShipIndex = parseInt(shipNameWithLastId.substr(-1))
-    let shipLastId = lastShipIndex + parseInt(this.gridLocation)
     const notAllowedHorizontal = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 1, 11, 21, 31, 41, 51, 61, 71, 81, 91, 2, 22, 32, 42, 52, 62, 72, 82, 92, 3, 13, 23, 33, 43, 53, 63, 73, 83, 93]
-    const notAllowedVertical = [99, 98, 97, 96, 95, 94, 93, 92, 91, 90, 89, 88, 87, 86, 85, 84, 83, 82, 81, 80, 79, 78, 77, 76, 75, 74, 73, 72, 71, 70, 69, 68, 67, 66, 65, 64, 63, 62, 61, 60]
+    // const notAllowedVertical = [99, 98, 97, 96, 95, 94, 93, 92, 91, 90, 89, 88, 87, 86, 85, 84, 83, 82, 81, 80, 79, 78, 77, 76, 75, 74, 73, 72, 71, 70, 69, 68, 67, 66, 65, 64, 63, 62, 61, 60]
+    const notAllowedVertical = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39]
 
     let newNotAllowedHorizontal = notAllowedHorizontal.splice(0, 10 * lastShipIndex)
     let newNotAllowedVertical = notAllowedVertical.splice(0, 10 * lastShipIndex)
 
     this.selectedShipIndex = parseInt(this.selectedShipNameWithIndex.substr(-1))
 
-    shipLastId = shipLastId - this.selectedShipIndex
+    // let shipLastId = lastShipIndex + parseInt(this.gridLocation)
+    let shipLastId = parseInt(this.gridLocation)
+
+    if (this.isHorizontal)
+      shipLastId = (shipLastId + lastShipIndex - this.selectedShipIndex)%100
+    else
+      shipLastId = (shipLastId + (lastShipIndex - this.selectedShipIndex)*10)%100
+
+    // check to make sure every spot that wants to be interacted with is empty. 
+    if (this.isHorizontal && !newNotAllowedHorizontal.includes(shipLastId)) {
+      for (let i = 0; i < this.draggedShipLength; i++) {
+        if(this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex + i].classList.contains('taken')) {
+          return;
+        }
+      }
+    } else if (!this.isHorizontal && !newNotAllowedVertical.includes(shipLastId)) {
+      for (let i = 0; i < this.draggedShipLength; i++) {
+        if (this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex*10 + this.width * i].classList.contains('taken')) {
+          return;
+        }
+      }
+    }
 
     if (this.isHorizontal && !newNotAllowedHorizontal.includes(shipLastId)) {
       for (let i = 0; i < this.draggedShipLength; i++) {
-        console.log(this.square.dataset.id)
-        console.log("-----------")
-        console.log(this.userSquares[i].dataset.id)
-        this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex + i].classList.add('taken', shipClass)
+        let pic:string = ''
+        if (i == 0) {pic = "HLEdge"}
+        else if (i == this.draggedShipLength-1) {pic = "HREdge"}
+        else {pic = "HCenter"}
+
+        this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex + i].classList.add('taken', shipClass, pic)
+        this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex + i].classList.remove('empty')
       }
       //As long as the index of the ship you are dragging is not in the newNotAllowedVertical array! This means that sometimes if you drag the ship by its
       //index-1 , index-2 and so on, the ship will rebound back to the displayGrid.
     } else if (!this.isHorizontal && !newNotAllowedVertical.includes(shipLastId)) {
       for (let i = 0; i < this.draggedShipLength; i++) {
-        this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex + this.width * i].classList.add('taken', shipClass)
+        let pic:string = ''
+        if (i == 0) {pic = "VTEdge"}
+        else if (i == this.draggedShipLength-1) {pic = "VBEdge"}
+        else {pic = "VCenter"}
+
+        this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex*10 + this.width * i].classList.add('taken', shipClass, pic)
+        this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex*10 + this.width * i].classList.remove('empty')
       }
     } else return
 
     this.displayGrid.removeChild(this.draggedShip)
+    this.playerShipCount++;
   }
 
   dragEnd() {
     console.log('dragend')
   }
 
+  setUpGame() {
+    if (this.playerShipCount != 5) {
+      console.log("Place more ships.")
+      return
+    }
+    else if (this.gameStarted == true) {
+      console.log("The game's already in progress.")
+      return
+    } 
+    else {
+      this.gameStarted = true;
+      this.playGame()
+    }
+  }
+
   playGame() {
     if (this.isGameOver) {
-      console.log("game broke")
+      console.log("The game is over.")
       return
     }
     else if (this.currentPlayer === 'user') {
@@ -278,17 +340,23 @@ export class BoardComponent implements OnInit {
   }
 
   revealSquare(square: any) {
-    if (!square.classList.contains('hit')) {
+    if (square.classList.contains('hit') || square.classList.contains('miss'))
+    {
+      return;
+    }
+    else if (square.classList.contains('taken'))
+    {
+      // increment count, mark them as HIT, end turn
+      square.classList.add('hit')
       if (square.classList.contains('destroyer')) this.destroyerCount++
       if (square.classList.contains('submarine')) this.submarineCount++
       if (square.classList.contains('cruiser')) this.cruiserCount++
       if (square.classList.contains('battleship')) this.battleshipCount++
       if (square.classList.contains('carrier')) this.carrierCount++
     }
-    if (square.classList.contains('taken')) {
-      square.classList.add('hit')
-    }
-    else {
+    else if (square.classList.contains('empty'))
+    {
+      // mark it as miss, end turn
       square.classList.add('miss')
     }
 
@@ -299,13 +367,30 @@ export class BoardComponent implements OnInit {
 
   computerGo() {
     let random = Math.floor(Math.random() * this.userSquares.length)
-    if (!this.userSquares[random].classList.contains('hit')) {
-      this.userSquares[random].classList.add('hit')
-      if (this.userSquares[random].classList.contains('destroyer')) this.cpuDestroyerCount++
-      if (this.userSquares[random].classList.contains('submarine')) this.cpuSubmarineCount++
-      if (this.userSquares[random].classList.contains('cruiser')) this.cpuCruiserCount++
-      if (this.userSquares[random].classList.contains('battleship')) this.cpuBattleshipCount++
-      if (this.userSquares[random].classList.contains('carrier')) this.cpuCarrierCount++
+    if (!this.userSquares[random].classList.contains('hit') && !this.userSquares[random].classList.contains('miss')) {
+      if (this.userSquares[random].classList.contains('destroyer')) {
+        this.cpuDestroyerCount++
+        this.userSquares[random].classList.add('hit')
+      }
+      else if (this.userSquares[random].classList.contains('submarine')) {
+        this.cpuSubmarineCount++
+        this.userSquares[random].classList.add('hit')
+      }
+      else if (this.userSquares[random].classList.contains('cruiser')) {
+        this.cpuCruiserCount++
+        this.userSquares[random].classList.add('hit')
+      }
+      else if (this.userSquares[random].classList.contains('battleship')) {
+        this.cpuBattleshipCount++
+        this.userSquares[random].classList.add('hit')
+      }
+      else if (this.userSquares[random].classList.contains('carrier')) {
+        this.cpuCarrierCount++
+        this.userSquares[random].classList.add('hit')
+      }
+      else {
+        this.userSquares[random].classList.add('miss')
+      }
       this.checkForWins()
     } else this.computerGo()
     this.currentPlayer = 'user'
