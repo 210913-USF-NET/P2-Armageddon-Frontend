@@ -90,9 +90,13 @@ export class FriendListComponent implements OnInit {
   }
   select(index: number) {
     this.selectedIndex = index;
+    if (index >= 0) {
+
+    
     this.armageddonService.getUserByName(this.friendusers[index].username).then(async result => {
       this.currentFriend = result;
     });
+    }
   }
 
   addFriend(friendname: string) {
