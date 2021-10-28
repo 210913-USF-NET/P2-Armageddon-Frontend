@@ -17,6 +17,9 @@ export class ChatService {
       transport: signalR.HttpTransportType.WebSockets
     })
     .build();*/
+ /* private connection: any = new signalR.HubConnectionBuilder().withUrl("https://armageddonapi.azurewebsites.net/chatsocket")   // mapping to the chathub as in startup.cs
+    .configureLogging(signalR.LogLevel.Information)
+    .build();*/
   private connection: any = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/chatsocket")   // mapping to the chathub as in startup.cs
     .configureLogging(signalR.LogLevel.Information)
     .build();
@@ -24,8 +27,8 @@ export class ChatService {
     .configureLogging(signalR.LogLevel.Information)
     .build();*/
   /*readonly POST_URL = environment.bsAPIUrl+"/chat/send/";*/
-  readonly POST_URL = "https://localhost:5001/api/chat/send/"
-
+  /*readonly POST_URL = "https://armageddonapi.azurewebsites.net/api/chat/send/"*/
+  readonly POST_URL = "https://localhost:5001/api/chat/send/";
   private receivedMessageObject: MessageDto = new MessageDto();
   private sharedObj = new Subject<MessageDto>();
 
