@@ -1,18 +1,15 @@
 <!-- src/app/components/login-button/login-button.component.html -->
 <style>
-    .btn:hover {
-        background-color: black;
-        color: white;
+    .btn {
+      font-size: 40px; 
+      border: 3px solid;  
+      border-radius: 10px;  
     }
 
-    .btn {
-        border-top: 5px;
-        padding-top: 5px;
-        font-size: 20px;
-        margin-top: 15px;
+    button {
+      padding: 25px 222px;
+      margin-left: 750px;
     }
 </style>
   
-<button class="btn" (click)="goToBoard()">
-    <h1>Play</h1>
-</button>
+<button class="btn btn-outline-light" (click)="goToBoard()">Play</button>

@@ -25,12 +25,20 @@ export class LobbyComponent implements OnInit {
     totalMatches: 0
   };
 
+  AMOUNT: number = 10;
+  users: user[] = []
   declare profileJson: string
   declare username: string
 
   ngOnInit(): void {
     // window.location.href.slice(27)
     // ^ this gets everything after home/, which on the lobby is JUST the username. Or should be. 
+
+    this.bsService.getAllUsers().then(result => {
+      result.sort((a, b) => (a.totalWins < b.totalWins) ? 1 : -1);
+      result.splice(this.AMOUNT);
+      this.users = result;
+    })
 
     this.auth.user$.subscribe(
       (profile) => {
