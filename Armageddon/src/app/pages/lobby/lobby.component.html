@@ -1,22 +1,46 @@
-<div class="username-box">
-  <!-- <app-logout-button></app-logout-button> -->
-  <span class="greeting">Hello, {{user.username}}</span>
-  <app-profilebutton></app-profilebutton>
-</div>
-<div class="ready">
+<div class="container">
+  <div class="username-box">
+    <div class="greeting">Hello, <span>{{user.username}}</span></div>
+    <app-profilebutton></app-profilebutton>
+  </div>
+
   <app-ready></app-ready>
 </div>
-<div class="profile">
-  <span class="greeting2">Win Streak: {{user.winStreak}}</span>
-  <span class="greeting2">Shot Streak: {{user.shotStreak}}</span>
-  <p></p>
-  <span class="greeting2">Total Wins: {{user.totalWins}} </span>
-  <span class="greeting2">Total Matches: {{user.totalMatches}}</span>
+
+<div class="container">
+  <div class="leaderboardcontainer">
+    <h3>Leaderboard</h3>
+      <table class="table table-hover">
+        <thead>
+          <th>Rank</th>
+          <th style="padding-left: 50px;">Name</th>
+          <th style="padding-left: 150px;">Wins</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td class="counterCell"></td>
+            <td style="padding-left: 50px;">{{user.username}}</td>
+            <td style="padding-left: 150px;">{{user.totalWins}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- <hr>
+
+      <div class="profile">
+        <span class="stat">Win Streak: {{user.winStreak}}</span>
+        <span class="stat">Shot Streak: {{user.shotStreak}}</span>
+        <span class="stat">Total Wins: {{user.totalWins}} </span>
+        <span class="stat">Total Matches: {{user.totalMatches}}</span>
+      </div> -->
+  </div>
+
+  <div class="lobbychat">
+    <h3 class="lobby">Lobby Chat</h3>
+    <app-chat></app-chat>
+  </div>
 </div>
-<div class="leaderboard">
-  <app-leaderboard></app-leaderboard>
-</div>
-<div class="lobbychat">
-  <h2>Lobby Chat</h2>
-  <app-chat></app-chat>
-</div>
+
+<script>
+  var i = 1;
+</script>

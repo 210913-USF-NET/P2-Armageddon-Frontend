@@ -41,7 +41,7 @@ h2 {
 .msg-box{
   width: 100%;
   height: 450px;
-  margin-top: 20px;
+  margin-top: -30px;
   border: 2px solid #191D32;
   border-radius: .5em;
   padding: 100px 100px;
@@ -55,13 +55,13 @@ h2 {
 
 {
   margin-bottom: 10px;
-  color: #459c1a;
+  color: black;
   text-align: left;
 }
 
 .in-msg {
   margin-bottom: 10px;
-  color: #DD1155;
+  color: cornflowerblue;
   text-align: right;
 }
 
@@ -84,20 +84,20 @@ h2 {
   border: 0px solid rgba(0, 0, 0, 0);
   padding: 10px;
   flex: 1 1 0;
-  border: 1.5px solid #DD1155;
+  border: 1.5px solid black;
 }
 
 .msg-input:focus {
   outline: none;
-  border-color: #DD1155;
-  box-shadow: 0 0 5px #DD1155;
+  border-color: green;
+  box-shadow: 0 0 5px green;
 }
 
 .send-btn {
   height: 100%;
   width: 100px;
   border-radius: .3em;
-  background-color: #DD1155;
+  background-color: green;
   margin-left: 20px;
   border: 0px solid rgba(0, 0, 0, 0);
   font-size: 25px;
@@ -107,8 +107,8 @@ h2 {
 
   .send-btn:focus {
     outline: none;
-    border-color: #DD1155;
-    box-shadow: 0 0 5px #DD1155;
+    border-color: green;
+    box-shadow: 0 0 5px green;
   }
 
 }

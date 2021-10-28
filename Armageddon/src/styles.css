@@ -2,7 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 
 body{ 
-    background: #050505;
+    /* background: #050505; */
+    background-image: linear-gradient(black , rgb(22, 22, 22));
 }
 
 #container {
