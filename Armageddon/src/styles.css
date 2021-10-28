@@ -10,7 +10,7 @@ body{
   margin: 10vw auto;
 }
 
-h1 {
+/* h1 {
   text-align: center;
   color: rgb(255, 255, 255);
   font-size: 150px;
@@ -18,14 +18,15 @@ h1 {
   letter-spacing: 8px;
   margin: 0;
   line-height: 0;
-}
+} */
 
 .container {
   display: flex;
 }
 
 .grid-user {
-  width: 500px;
+  min-width: 500px;
+  max-width: 500px;
   height: 500px;
   display: flex;
   flex-wrap: wrap;
@@ -38,12 +39,17 @@ h1 {
   height: 50px;
 }
 
+.empty {
+  border: 1px solid darkblue;
+}
+
 .grid-computer {
-  width: 500px;
+  min-width: 500px;
+  max-width: 500px;
   height: 500px;
   display: flex;
   flex-wrap: wrap;
-  background-color: yellow;
+  background-color: cornflowerblue;
   margin: 20px;
 }
 
@@ -57,7 +63,8 @@ h1 {
 .destroyer-container {
   width: 100px;
   height: 50px;
-  background-color: gray;
+  /* background-color: gray; */
+  background-image: url('./assets/ship-2.png');
   margin: 10px;
   display: flex;
 }
@@ -65,7 +72,8 @@ h1 {
 .destroyer-container-vertical {
   width: 50px;
   height: 100px;
-  background-color: gray;
+  /* background-color: gray; */
+  background-image: url('./assets/ship-2-v.png');
   margin: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -74,7 +82,8 @@ h1 {
 .submarine-container {
   width: 150px;
   height: 50px;
-  background-color: gray;
+  /* background-color: gray; */
+  background-image: url('./assets/ship-3.png');
   margin: 10px;
   display: flex;
 }
@@ -82,7 +91,8 @@ h1 {
 .submarine-container-vertical {
   width: 50px;
   height: 150px;
-  background-color: gray;
+  /* background-color: gray; */
+  background-image: url('./assets/ship-3-v.png');
   margin: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -91,7 +101,8 @@ h1 {
 .cruiser-container {
   width: 150px;
   height: 50px;
-  background-color: gray;
+  /* background-color: gray; */
+  background-image: url('./assets/ship-3.png');
   margin: 10px;
   display: flex;
 }
@@ -99,7 +110,8 @@ h1 {
 .cruiser-container-vertical {
   width: 50px;
   height: 150px;
-  background-color: gray;
+  /* background-color: gray; */
+  background-image: url('./assets/ship-3-v.png');
   margin: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -108,7 +120,8 @@ h1 {
 .battleship-container {
   width: 200px;
   height: 50px;
-  background-color: gray;
+  /* background-color: gray; */
+  background-image: url('./assets/ship-4.png');
   margin: 10px;
   display: flex;
 }
@@ -116,7 +129,8 @@ h1 {
 .battleship-container-vertical {
   width: 50px;
   height: 200px;
-  background-color: gray;
+  /* background-color: gray; */
+  background-image: url('./assets/ship-4-v.png');
   margin: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -125,7 +139,8 @@ h1 {
 .carrier-container {
   width: 250px;
   height: 50px;
-  background-color: gray;
+  /* background-color: gray; */
+  background-image: url('./assets/ship-5.png');
   margin: 10px;
   display: flex;
 }
@@ -133,7 +148,8 @@ h1 {
 .carrier-container-vertical {
   width: 50px;
   height: 250px;
-  background-color: gray;
+  /* background-color: gray; */
+  background-image: url('./assets/ship-5-v.png');
   margin: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -142,6 +158,34 @@ h1 {
 .ship div {
   width: 50px;
   height: 50px;
+}
+
+.ship {
+  display:inline-flex;
+}
+
+/* content:url('./assets/ship-edge-horizontal.png'); */
+.HLEdge{
+  background:url('./assets/ship-edge-horizontal.png');
+}
+.HREdge{
+  background:url('./assets/ship-edge-horizontal.png');
+  transform: rotate(180deg);
+}
+.HCenter{
+  background:url('./assets/ship-center-horizontal.png');
+}
+.VTEdge{
+  background:url('./assets/ship-edge-horizontal.png');
+  transform: rotate(90deg);
+}
+.VBEdge{
+  background:url('./assets/ship-edge-horizontal.png');
+  transform: rotate(270deg);
+}
+.VCenter{
+  background:url('./assets/ship-center-horizontal.png');
+  transform: rotate(90deg);
 }
 
 .destroyer {
@@ -165,11 +209,13 @@ h1 {
 }
 
 .hit {
-  background-color: red;
+  /* background-color: red; */
+  content: URL('./assets/Hit.png')
 }
 
 .miss {
-   background-color: black;
+   /* background-color: black; */
+   content: URL('./assets/Miss2.png')
 }
 
 html, body { height: 100%; }

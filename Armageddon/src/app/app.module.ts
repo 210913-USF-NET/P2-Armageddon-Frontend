@@ -23,6 +23,7 @@ import { FriendListComponent } from './friend-list/friend-list.component';
 import { TalkjsComponent } from '../app/talkjs/talkjs.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChatComponent } from './components/Lobby/chat/chat.component';
+import { ReadyComponent } from './components/Lobby/ready/ready.component';
 /*import { GoHomeComponent } from './components/authentication components/go-home-button';*/
 
 @NgModule({
@@ -43,7 +44,8 @@ import { ChatComponent } from './components/Lobby/chat/chat.component';
     LobbyComponent,
     ProfilebuttonComponent,
     TalkjsComponent,
-    ChatComponent
+    ChatComponent,
+    ReadyComponent
   ],
   imports: [
     BrowserModule,
