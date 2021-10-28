@@ -1,4 +1,10 @@
 import { Component, OnInit, Directive, Renderer2, ElementRef } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
+import { layout } from 'src/app/models/layOut';
+import { match } from 'src/app/models/match';
+import { turn } from 'src/app/models/turn';
+import { user } from 'src/app/models/user';
+import { ArmageddonApiService } from 'src/app/service/armageddon-api.service';
 
 @Component({
   selector: 'app-board',
@@ -6,6 +12,7 @@ import { Component, OnInit, Directive, Renderer2, ElementRef } from '@angular/co
   styleUrls: ['./board.component.css'
   ]
 })
+
 export class BoardComponent implements OnInit {
 
   userGrid: any
@@ -49,11 +56,112 @@ export class BoardComponent implements OnInit {
   component: any
   gameStarted: any
 
+  match: match = {
+    id: 0,
+    hostId: 0,
+    turnCount: 0,
+    winnerId: 0,
+    opponentId: 0
+  }
+
+  layouts:layout[] = [
+      { 'id': 0,
+      'playerId': 0,
+      'matchId': 0,
+      'shipType': '',
+      'startLocation': 0,
+      'direction': '' },
+      { 'id': 0,
+      'playerId': 0,
+      'matchId': 0,
+      'shipType': '',
+      'startLocation': 0,
+      'direction': '' },
+      { 'id': 0,
+      'playerId': 0,
+      'matchId': 0,
+      'shipType': '',
+      'startLocation': 0,
+      'direction': '' },
+      { 'id': 0,
+      'playerId': 0,
+      'matchId': 0,
+      'shipType': '',
+      'startLocation': 0,
+      'direction': '' },
+      { 'id': 0,
+      'playerId': 0,
+      'matchId': 0,
+      'shipType': '',
+      'startLocation': 0,
+      'direction': '' },
+      { 'id': 0,
+      'playerId': 0,
+      'matchId': 0,
+      'shipType': '',
+      'startLocation': 0,
+      'direction': '' },
+      { 'id': 0,
+      'playerId': 0,
+      'matchId': 0,
+      'shipType': '',
+      'startLocation': 0,
+      'direction': '' },
+      { 'id': 0,
+      'playerId': 0,
+      'matchId': 0,
+      'shipType': '',
+      'startLocation': 0,
+      'direction': '' },
+      { 'id': 0,
+      'playerId': 0,
+      'matchId': 0,
+      'shipType': '',
+      'startLocation': 0,
+      'direction': '' },
+      { 'id': 0,
+      'playerId': 0,
+      'matchId': 0,
+      'shipType': '',
+      'startLocation': 0,
+      'direction': '' }
+  ]
+  turns:turn[] = [];
+  counter:number = 0;
+  name: string = ''
+  user: user = {
+    'id': 0,
+    'username': '',
+    'email': '',
+    'winStreak': 0,
+    'shotStreak': 0,
+    'totalWins': 0,
+    'totalMatches': 0
+  }
+
+
   gridLocation: any
 
-  constructor(private renderer: Renderer2, private el: ElementRef) { }
+  constructor(private renderer: Renderer2, private el: ElementRef, private armAPI: ArmageddonApiService, private auth: AuthService) { }
 
   ngOnInit(): void {
+    this.auth.user$.subscribe(
+      (profile) => {
+        this.name = JSON.parse(JSON.stringify(profile, null, 2)).nickname;
+
+        this.armAPI.getUserByName(this.name).then((value) => {
+          this.user.id = value.id;
+          this.user.username = value.username;
+          this.user.email = value.email;
+          this.user.winStreak = value.winStreak;
+          this.user.shotStreak = value.shotStreak;
+          this.user.totalWins = value.totalWins;
+          this.user.totalMatches = value.totalMatches;
+
+          console.log(this.user);
+        });
+      });
+
     this.userGrid = document.querySelector('.grid-user')
     this.computerGrid = document.querySelector('.grid-computer')
     this.displayGrid = document.querySelector('.grid-display')
@@ -155,6 +263,7 @@ export class BoardComponent implements OnInit {
       this.square = document.createElement('div')
       this.square.dataset.id = i.toString()
       this.square.classList.add("empty")
+      this.square.classList.add(i)
       grid.appendChild(this.square)
       this.userSquares.push(this.square)
     }
@@ -163,6 +272,7 @@ export class BoardComponent implements OnInit {
   createBoardCpu(grid: any) {
     for (let i = 0; i < this.width * this.width; i++) {
       this.square = document.createElement('div')
+      this.square.classList.add(i)
       this.square.classList.add("empty")
       this.square.dataset.id = i.toString()
       grid.appendChild(this.square)
@@ -190,6 +300,62 @@ export class BoardComponent implements OnInit {
       current.forEach(
         (index: any) => 
           this.computerSquares[randomStart + index].classList.remove('empty'));
+
+      let direction: string
+      (randomDirection)? direction = 'down': direction = 'right'
+      switch(ship.name)
+      {
+        case "destroyer":
+          this.layouts[5] = {
+            "id": 0,
+            "playerId": 0,
+            'matchId': 0,
+            "shipType": 'destroyer',
+            "startLocation": randomStart,
+            "direction": direction
+          }
+          break;
+        case "submarine":
+          this.layouts[6] = {
+            "id": 0,
+            "playerId": 0,
+            'matchId': 0,
+            "shipType": 'submarine',
+            "startLocation": randomStart,
+            "direction": direction
+          }
+          break;
+        case "cruiser":
+          this.layouts[7] = {
+            "id": 0,
+            "playerId": 0,
+            'matchId': 0,
+            "shipType": 'cruiser',
+            "startLocation": randomStart,
+            "direction": direction
+          }
+          break;
+        case "battleship":
+          this.layouts[8] = {
+            "id": 0,
+            "playerId": 0,
+            'matchId': 0,
+            "shipType": 'battleship',
+            "startLocation": randomStart,
+            "direction": direction
+          }
+          break;
+        case "carrier":
+          this.layouts[9] = {
+            "id": 0,
+            "playerId": 0,
+            'matchId': 0,
+            "shipType": 'carrier',
+            "startLocation": randomStart,
+            "direction": direction
+          }
+          break;
+      }
     }
     else this.generate(ship)
   }
@@ -298,6 +464,66 @@ export class BoardComponent implements OnInit {
       }
     } else return
 
+    // Saves the player layouts to an array to be pushed later. 
+    let start = parseInt(this.gridLocation) - this.selectedShipIndex;
+    let direction: string
+    (this.isHorizontal)? direction = 'right': direction = 'down'
+    switch(this.draggedShip.firstChild.id)
+    {
+      case "destroyer-0":
+        this.layouts[0] = {
+          "id": 0,
+          "playerId": this.user.id,
+          'matchId': 0,
+          "shipType": 'destroyer',
+          "startLocation": start,
+          "direction": direction
+        }
+        break;
+      case "submarine-0":
+        this.layouts[1] = {
+          "id": 0,
+          "playerId": this.user.id,
+          'matchId': 0,
+          "shipType": 'submarine',
+          "startLocation": start,
+          "direction": direction
+        }
+        break;
+      case "cruiser-0":
+        this.layouts[2] = {
+          "id": 0,
+          "playerId": this.user.id,
+          'matchId': 0,
+          "shipType": 'cruiser',
+          "startLocation": start,
+          "direction": direction
+        }
+        break;
+      case "battleship-0":
+        this.layouts[3] = {
+          "id": 0,
+          "playerId": this.user.id,
+          'matchId': 0,
+          "shipType": 'battleship',
+          "startLocation": start,
+          "direction": direction
+        }
+        break;
+      case "carrier-0":
+        this.layouts[4] = {
+          "id": 0,
+          "playerId": this.user.id,
+          'matchId': 0,
+          "shipType": 'carrier',
+          "startLocation": start,
+          "direction": direction
+        }
+        break;
+    }
+
+    console.log(this.layouts);
+
     this.displayGrid.removeChild(this.draggedShip)
     this.playerShipCount++;
   }
@@ -316,6 +542,8 @@ export class BoardComponent implements OnInit {
       return
     } 
     else {
+      this.match.hostId = this.user.id;
+
       this.gameStarted = true;
       this.playGame()
     }
@@ -360,6 +588,16 @@ export class BoardComponent implements OnInit {
       square.classList.add('miss')
     }
 
+    // [TODO] Add player turn to turns
+    let turn:turn = {
+      id: 0,
+      playerId: this.user.id,
+      targetId: 0,
+      matchId: 0,
+      shotLocation: square.classList[0],
+      turnNumber: this.counter
+    }
+    this.turns.push(turn)
     this.checkForWins()
     this.currentPlayer = 'computer'
     this.playGame()
@@ -393,6 +631,20 @@ export class BoardComponent implements OnInit {
       }
       this.checkForWins()
     } else this.computerGo()
+
+    let turn:turn = {
+      id: 0,
+      playerId: 0,
+      targetId: this.user.id,
+      matchId: 0,
+      shotLocation: random,
+      turnNumber: this.counter
+    }
+    this.turns.push(turn)
+
+    this.counter++
+
+    // [TODO] Send computer turn to DB
     this.currentPlayer = 'user'
     this.turnDisplay.innerHTML = 'Your Go'
   }
@@ -440,15 +692,38 @@ export class BoardComponent implements OnInit {
     }
     if ((this.destroyerCount + this.submarineCount + this.cruiserCount + this.battleshipCount + this.carrierCount) === 50) {
       this.infoDisplay.innerHTML = "YOU WIN"
+      this.match.winnerId = this.user.id
+      this.user.totalWins++
       this.gameOver()
     }
     if ((this.cpuDestroyerCount + this.cpuSubmarineCount + this.cpuCruiserCount + this.cpuBattleshipCount + this.cpuCarrierCount) === 50) {
       this.infoDisplay.innerHTML = "COMPUTER WINS"
+      this.match.winnerId = 0
       this.gameOver()
     }
   }
 
   gameOver() {
+    // Send Match to DB
+    // Receive Match from DB (to get ID), possibly in the Send call?
+    // Add matchId to Layouts
+    // Send Layouts to DB. 
+    // Send Turns to DB. 
+    this.user.totalMatches++
+    this.match.turnCount = this.counter;
+    this.armAPI.addMatch(this.match).then(
+      (match) => {
+        this.layouts.forEach(layout => {
+          layout.matchId = match.id;
+          this.armAPI.addLayout(layout)
+        });
+        this.turns.forEach(turn => {
+          turn.matchId = match.id;
+          this.armAPI.addTurn(turn)
+        });
+      }
+    )
+    
     this.isGameOver = true
     this.startButton.removeEventListener('click', this.playGame)
   }
