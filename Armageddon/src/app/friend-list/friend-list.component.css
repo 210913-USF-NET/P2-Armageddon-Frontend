@@ -83,3 +83,8 @@
 .btn2 {
   padding-left: 35px;
 }
+
+.mainbody{
+    max-height:40%;
+    overflow:auto;
+}
