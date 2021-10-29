@@ -25,41 +25,35 @@
   top: 90px;
 }
 
-
-
 .profile-body {
   height: 100vh;
-  z-index: 0;
-  padding: 0;
-  margin: 0;
 }
 
 .bodydiv{
   background-color: white;
   width: 250px;
   height: 125px;
-  opacity:0.7;
   text-align:center;
   border-radius:5px;
 }
 .totalmatch {
   position: absolute;
-  left: 400px;
+  left: 900px;
   top: 300px;
 }
 .totalwin {
   position: absolute;
-  left: 800px;
+  left: 1200px;
   top: 300px;
 }
 .winsteak {
   position: absolute;
-  left: 400px;
+  left: 900px;
   top: 500px;
 }
 .shotstreak {
   position: absolute;
-  left: 800px;
+  left: 1200px;
   top: 500px;
 }
 h4{
