@@ -1,26 +1,18 @@
-<!-- <div class="username square">
-  <app-logout-button></app-logout-button>
-  <span>Hello, {{user.username}}</span> -->
+<div class="container">
+  <h1 class="username">{{ user.username }}</h1>
+  <h3 class="user-email">Email: {{ user.email }}</h3>
+</div>
 
-  <!--src/app/pages/profile/profile.component.html-->
+<div>
+  <a class="btn btn-outline-light btn-lg" (click)="goToHome()" role="button">Home</a>
+</div>
 
-<div class="profile-header">
-  <div class="row align-items-center">
-    <div class="col-md-2 mb-3">
-      <!-- <img [src]="user.picture"
-            alt="User's profile picture"
-            class="rounded-circle img-fluid profile-picture userimg" /> -->
-    </div>
-    <div class="col-md text-center text-md-left">
-      <h2 class="username">{{ user.username }}</h2>
-      <h3 class="useremail">{{ user.email }}</h3>
-    </div>
-
-    <div>
-      <a class="homebtn btn" (click)="goToHome()" role="button">Home</a>
-    </div>
+<div class="container" style="border: none;">
+  <div class="profile-body">
+    <app-friend-list></app-friend-list>
   </div>
 </div>
+
 <div class="profile-body">
   <div class="totalmatch bodydiv">
     <h4>Total Matches</h4>
@@ -37,7 +29,4 @@
   <div class="shotstreak bodydiv">
     <h4>Shot Steak</h4>
     <h5>{{user.shotStreak}}</h5>
-  </div>
-  <div class="profile-body">
-    <app-friend-list></app-friend-list>
   </div>

@@ -5,6 +5,7 @@ import { match } from 'src/app/models/match';
 import { turn } from 'src/app/models/turn';
 import { user } from 'src/app/models/user';
 import { ArmageddonApiService } from 'src/app/service/armageddon-api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board',
@@ -56,6 +57,8 @@ export class BoardComponent implements OnInit {
   component: any
   gameStarted: any
 
+  content: any
+
   match: match = {
     id: 0,
     hostId: 0,
@@ -64,70 +67,90 @@ export class BoardComponent implements OnInit {
     opponentId: 0
   }
 
-  layouts:layout[] = [
-      { 'id': 0,
+  layouts: layout[] = [
+    {
+      'id': 0,
       'playerId': 0,
       'matchId': 0,
       'shipType': '',
       'startLocation': 0,
-      'direction': '' },
-      { 'id': 0,
+      'direction': ''
+    },
+    {
+      'id': 0,
       'playerId': 0,
       'matchId': 0,
       'shipType': '',
       'startLocation': 0,
-      'direction': '' },
-      { 'id': 0,
+      'direction': ''
+    },
+    {
+      'id': 0,
       'playerId': 0,
       'matchId': 0,
       'shipType': '',
       'startLocation': 0,
-      'direction': '' },
-      { 'id': 0,
+      'direction': ''
+    },
+    {
+      'id': 0,
       'playerId': 0,
       'matchId': 0,
       'shipType': '',
       'startLocation': 0,
-      'direction': '' },
-      { 'id': 0,
+      'direction': ''
+    },
+    {
+      'id': 0,
       'playerId': 0,
       'matchId': 0,
       'shipType': '',
       'startLocation': 0,
-      'direction': '' },
-      { 'id': 0,
+      'direction': ''
+    },
+    {
+      'id': 0,
       'playerId': 0,
       'matchId': 0,
       'shipType': '',
       'startLocation': 0,
-      'direction': '' },
-      { 'id': 0,
+      'direction': ''
+    },
+    {
+      'id': 0,
       'playerId': 0,
       'matchId': 0,
       'shipType': '',
       'startLocation': 0,
-      'direction': '' },
-      { 'id': 0,
+      'direction': ''
+    },
+    {
+      'id': 0,
       'playerId': 0,
       'matchId': 0,
       'shipType': '',
       'startLocation': 0,
-      'direction': '' },
-      { 'id': 0,
+      'direction': ''
+    },
+    {
+      'id': 0,
       'playerId': 0,
       'matchId': 0,
       'shipType': '',
       'startLocation': 0,
-      'direction': '' },
-      { 'id': 0,
+      'direction': ''
+    },
+    {
+      'id': 0,
       'playerId': 0,
       'matchId': 0,
       'shipType': '',
       'startLocation': 0,
-      'direction': '' }
+      'direction': ''
+    }
   ]
-  turns:turn[] = [];
-  counter:number = 0;
+  turns: turn[] = [];
+  counter: number = 0;
   name: string = ''
   user: user = {
     'id': 0,
@@ -142,7 +165,7 @@ export class BoardComponent implements OnInit {
 
   gridLocation: any
 
-  constructor(private renderer: Renderer2, private el: ElementRef, private armAPI: ArmageddonApiService, private auth: AuthService) { }
+  constructor(private router: Router, private renderer: Renderer2, private el: ElementRef, private armAPI: ArmageddonApiService, private auth: AuthService) { }
 
   ngOnInit(): void {
     this.auth.user$.subscribe(
@@ -196,6 +219,8 @@ export class BoardComponent implements OnInit {
     this.cpuCarrierCount = 0
 
     this.gameStarted = false
+
+    this.content = document.getElementById('content')
 
     this.shipArray = [
       {
@@ -291,20 +316,18 @@ export class BoardComponent implements OnInit {
     const isAtRightEdge = current.some((index: any) => (randomStart + index) % this.width === this.width - 1)
     const isAtLeftEdge = current.some((index: any) => (randomStart + index) % this.width === 0)
 
-    if (!isTaken && !isAtRightEdge && !isAtLeftEdge) 
-    {
+    if (!isTaken && !isAtRightEdge && !isAtLeftEdge) {
       current.forEach(
-        (index: any) => 
+        (index: any) =>
           this.computerSquares[randomStart + index].classList.add('taken', ship.name));
 
-      current.forEach(
-        (index: any) => 
-          this.computerSquares[randomStart + index].classList.remove('empty'));
+      // current.forEach(
+      //   (index: any) => 
+      //     this.computerSquares[randomStart + index].classList.remove('empty'));
 
       let direction: string
-      (randomDirection)? direction = 'down': direction = 'right'
-      switch(ship.name)
-      {
+      (randomDirection) ? direction = 'down' : direction = 'right'
+      switch (ship.name) {
         case "destroyer":
           this.layouts[5] = {
             "id": 0,
@@ -421,20 +444,20 @@ export class BoardComponent implements OnInit {
     let shipLastId = parseInt(this.gridLocation)
 
     if (this.isHorizontal)
-      shipLastId = (shipLastId + lastShipIndex - this.selectedShipIndex)%100
+      shipLastId = (shipLastId + lastShipIndex - this.selectedShipIndex) % 100
     else
-      shipLastId = (shipLastId + (lastShipIndex - this.selectedShipIndex)*10)%100
+      shipLastId = (shipLastId + (lastShipIndex - this.selectedShipIndex) * 10) % 100
 
     // check to make sure every spot that wants to be interacted with is empty. 
     if (this.isHorizontal && !newNotAllowedHorizontal.includes(shipLastId)) {
       for (let i = 0; i < this.draggedShipLength; i++) {
-        if(this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex + i].classList.contains('taken')) {
+        if (this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex + i].classList.contains('taken')) {
           return;
         }
       }
     } else if (!this.isHorizontal && !newNotAllowedVertical.includes(shipLastId)) {
       for (let i = 0; i < this.draggedShipLength; i++) {
-        if (this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex*10 + this.width * i].classList.contains('taken')) {
+        if (this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex * 10 + this.width * i].classList.contains('taken')) {
           return;
         }
       }
@@ -442,10 +465,10 @@ export class BoardComponent implements OnInit {
 
     if (this.isHorizontal && !newNotAllowedHorizontal.includes(shipLastId)) {
       for (let i = 0; i < this.draggedShipLength; i++) {
-        let pic:string = ''
-        if (i == 0) {pic = "HLEdge"}
-        else if (i == this.draggedShipLength-1) {pic = "HREdge"}
-        else {pic = "HCenter"}
+        let pic: string = ''
+        if (i == 0) { pic = "HLEdge" }
+        else if (i == this.draggedShipLength - 1) { pic = "HREdge" }
+        else { pic = "HCenter" }
 
         this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex + i].classList.add('taken', shipClass, pic)
         this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex + i].classList.remove('empty')
@@ -454,22 +477,21 @@ export class BoardComponent implements OnInit {
       //index-1 , index-2 and so on, the ship will rebound back to the displayGrid.
     } else if (!this.isHorizontal && !newNotAllowedVertical.includes(shipLastId)) {
       for (let i = 0; i < this.draggedShipLength; i++) {
-        let pic:string = ''
-        if (i == 0) {pic = "VTEdge"}
-        else if (i == this.draggedShipLength-1) {pic = "VBEdge"}
-        else {pic = "VCenter"}
+        let pic: string = ''
+        if (i == 0) { pic = "VTEdge" }
+        else if (i == this.draggedShipLength - 1) { pic = "VBEdge" }
+        else { pic = "VCenter" }
 
-        this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex*10 + this.width * i].classList.add('taken', shipClass, pic)
-        this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex*10 + this.width * i].classList.remove('empty')
+        this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex * 10 + this.width * i].classList.add('taken', shipClass, pic)
+        this.userSquares[parseInt(this.gridLocation) - this.selectedShipIndex * 10 + this.width * i].classList.remove('empty')
       }
     } else return
 
     // Saves the player layouts to an array to be pushed later. 
     let start = parseInt(this.gridLocation) - this.selectedShipIndex;
     let direction: string
-    (this.isHorizontal)? direction = 'right': direction = 'down'
-    switch(this.draggedShip.firstChild.id)
-    {
+    (this.isHorizontal) ? direction = 'right' : direction = 'down'
+    switch (this.draggedShip.firstChild.id) {
       case "destroyer-0":
         this.layouts[0] = {
           "id": 0,
@@ -540,7 +562,7 @@ export class BoardComponent implements OnInit {
     else if (this.gameStarted == true) {
       console.log("The game's already in progress.")
       return
-    } 
+    }
     else {
       this.match.hostId = this.user.id;
 
@@ -563,17 +585,16 @@ export class BoardComponent implements OnInit {
     }
     else if (this.currentPlayer === 'computer') {
       this.turnDisplay.innerHTML = 'Computers Turn'
-      this.computerGo()
+      setTimeout(() => this.computerGo(), 500)
+      // this.computerGo()
     }
   }
 
   revealSquare(square: any) {
-    if (square.classList.contains('hit') || square.classList.contains('miss'))
-    {
+    if (square.classList.contains('hit') || square.classList.contains('miss')) {
       return;
     }
-    else if (square.classList.contains('taken'))
-    {
+    else if (square.classList.contains('taken')) {
       // increment count, mark them as HIT, end turn
       square.classList.add('hit')
       if (square.classList.contains('destroyer')) this.destroyerCount++
@@ -582,14 +603,13 @@ export class BoardComponent implements OnInit {
       if (square.classList.contains('battleship')) this.battleshipCount++
       if (square.classList.contains('carrier')) this.carrierCount++
     }
-    else if (square.classList.contains('empty'))
-    {
+    else if (square.classList.contains('empty')) {
       // mark it as miss, end turn
       square.classList.add('miss')
     }
 
     // [TODO] Add player turn to turns
-    let turn:turn = {
+    let turn: turn = {
       id: 0,
       playerId: this.user.id,
       targetId: 0,
@@ -632,7 +652,7 @@ export class BoardComponent implements OnInit {
       this.checkForWins()
     } else this.computerGo()
 
-    let turn:turn = {
+    let turn: turn = {
       id: 0,
       playerId: 0,
       targetId: this.user.id,
@@ -646,7 +666,7 @@ export class BoardComponent implements OnInit {
 
     // [TODO] Send computer turn to DB
     this.currentPlayer = 'user'
-    this.turnDisplay.innerHTML = 'Your Go'
+    this.turnDisplay.innerHTML = 'Your Turn'
   }
 
   checkForWins() {
@@ -709,22 +729,31 @@ export class BoardComponent implements OnInit {
     // Add matchId to Layouts
     // Send Layouts to DB. 
     // Send Turns to DB. 
-    this.user.totalMatches++
-    this.match.turnCount = this.counter;
-    this.armAPI.addMatch(this.match).then(
-      (match) => {
-        this.layouts.forEach(layout => {
-          layout.matchId = match.id;
-          this.armAPI.addLayout(layout)
-        });
-        this.turns.forEach(turn => {
-          turn.matchId = match.id;
-          this.armAPI.addTurn(turn)
-        });
-      }
-    )
-    
+    if (!this.isGameOver) {
+      console.log(this.user.totalMatches);
+      this.user.totalMatches++;
+      this.match.turnCount = this.counter;
+      this.armAPI.addMatch(this.match).then(
+        (match) => {
+          this.layouts.forEach(layout => {
+            layout.matchId = match.id;
+            this.armAPI.addLayout(layout)
+          });
+          this.turns.forEach(turn => {
+            turn.matchId = match.id;
+            this.armAPI.addTurn(turn)
+          });
+        }
+      )
+      this.armAPI.updateUser(this.user)
+    }
+
     this.isGameOver = true
     this.startButton.removeEventListener('click', this.playGame)
+    this.content.disabled = false
+  }
+
+  goHome(): void {
+    this.router.navigateByUrl('home/:name')
   }
 }
