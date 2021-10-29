@@ -1,29 +1,41 @@
 <style>
-    table {
-        counter-reset: tableCount;
-    }
+  table {
+    counter-reset: tableCount;
+  }
 
-    .counterCell::before {
-        content: counter(tableCount);
-        counter-increment: tableCount;
-    }
+  .counterCell::before {
+    content: counter(tableCount);
+    counter-increment: tableCount;
+  }
+
+  h3 {
+    font-size: 30px;
+  }
+
+  th {
+    font-size: 20px;
+  }
+
+  td {
+    font-size: 20px;
+  }
 </style>
 
-<div class="container">
-    <h3>Leaderboard</h3>
+<div class="leaderboardcontainer">
+  <h3>Leaderboard</h3>
     <table class="table table-hover">
-        <thead>
-            <th>Rank</th>
-            <th>Name</th>
-            <th>Wins</th>
-        </thead>
-        <tbody>
-            <tr *ngFor="let user of users">
-                <td class="counterCell"></td>
-                <td>{{user.username}}</td>
-                <td>{{user.totalWins}}</td>
-            </tr>
-        </tbody>
+      <thead>
+        <th>Rank</th>
+        <th>Name</th>
+        <th>Wins</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td class="counterCell"></td>
+          <td>{{user.username}}</td>
+          <td>{{user.totalWins}}</td>
+        </tr>
+      </tbody>
     </table>
 </div>
 <script>

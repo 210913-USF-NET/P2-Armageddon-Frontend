@@ -1,5 +1,15 @@
 <!-- src/app/components/login-button/login-button.component.html -->
+<style>
+  .btn:hover {
+    background-color: black;
+    color: white;
+  }
 
-<button class="btn" (click)="loginWithRedirect()" style="font-size: 30px;">
+  .btn {
+      font-size: 30px
+  }
+</style>
+
+<button class="btn" (click)="loginWithRedirect()">
   Log in
 </button>

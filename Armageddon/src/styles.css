@@ -2,7 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 
 body{ 
-    background: #050505;
+    /* background: #050505; */
+    background-image: linear-gradient(black , rgb(22, 22, 22));
 }
 
 #container {
@@ -10,7 +11,7 @@ body{
   margin: 10vw auto;
 }
 
-h1 {
+/* h1 {
   text-align: center;
   color: rgb(255, 255, 255);
   font-size: 150px;
@@ -18,4 +19,237 @@ h1 {
   letter-spacing: 8px;
   margin: 0;
   line-height: 0;
+} */
+
+.container {
+  display: flex;
 }
+
+.grid-user {
+  min-width: 500px;
+  max-width: 500px;
+  height: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: cornflowerblue;
+  margin: 20px;
+}
+
+.grid div {
+  width: 50px;
+  height: 50px;
+}
+
+.empty {
+  border: 1px solid rgb(0, 0, 100);
+}
+
+.grid-computer {
+  min-width: 500px;
+  max-width: 500px;
+  height: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: cornflowerblue;
+  margin: 20px;
+}
+
+.board-title {
+  font-family: 'Audiowide', cursive;
+  font-size: 100px;
+  color: white;
+  text-align: center;
+  padding: 50px 0 10px 0;
+}
+
+.grid-display {
+  min-width: 280px;
+  height: 500px;
+  background-color: cornsilk;
+  margin: 20px;
+}
+
+.hidden-info {
+  text-align: center;
+}
+
+.btn {
+  margin: auto 10px auto 10px;
+}
+
+#whose-go {
+  font-family: 'Audiowide', cursive;
+  font-size: 50px;
+  color: white;
+  text-align: center;
+  padding-top: 20px;
+}
+
+#info {
+  font-family: 'Audiowide', cursive;
+  font-size: 50px;
+  color: white;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.destroyer-container {
+  width: 100px;
+  height: 50px;
+  /* background-color: gray; */
+  background-image: url('./assets/ship-2.png');
+  margin: 10px;
+  display: flex;
+}
+
+.destroyer-container-vertical {
+  width: 50px;
+  height: 100px;
+  /* background-color: gray; */
+  background-image: url('./assets/ship-2-v.png');
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.submarine-container {
+  width: 150px;
+  height: 50px;
+  /* background-color: gray; */
+  background-image: url('./assets/ship-3.png');
+  margin: 10px;
+  display: flex;
+}
+
+.submarine-container-vertical {
+  width: 50px;
+  height: 150px;
+  /* background-color: gray; */
+  background-image: url('./assets/ship-3-v.png');
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cruiser-container {
+  width: 150px;
+  height: 50px;
+  /* background-color: gray; */
+  background-image: url('./assets/ship-3.png');
+  margin: 10px;
+  display: flex;
+}
+
+.cruiser-container-vertical {
+  width: 50px;
+  height: 150px;
+  /* background-color: gray; */
+  background-image: url('./assets/ship-3-v.png');
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.battleship-container {
+  width: 200px;
+  height: 50px;
+  /* background-color: gray; */
+  background-image: url('./assets/ship-4.png');
+  margin: 10px;
+  display: flex;
+}
+
+.battleship-container-vertical {
+  width: 50px;
+  height: 200px;
+  /* background-color: gray; */
+  background-image: url('./assets/ship-4-v.png');
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.carrier-container {
+  width: 250px;
+  height: 50px;
+  /* background-color: gray; */
+  background-image: url('./assets/ship-5.png');
+  margin: 10px;
+  display: flex;
+}
+
+.carrier-container-vertical {
+  width: 50px;
+  height: 250px;
+  /* background-color: gray; */
+  background-image: url('./assets/ship-5-v.png');
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ship div {
+  width: 50px;
+  height: 50px;
+}
+
+.ship {
+  display:inline-flex;
+}
+
+/* content:url('./assets/ship-edge-horizontal.png'); */
+.HLEdge{
+  background:url('./assets/ship-edge-horizontal.png');
+}
+.HREdge{
+  background:url('./assets/ship-edge-horizontal.png');
+  transform: rotate(180deg);
+}
+.HCenter{
+  background:url('./assets/ship-center-horizontal.png');
+}
+.VTEdge{
+  background:url('./assets/ship-edge-horizontal.png');
+  transform: rotate(90deg);
+}
+.VBEdge{
+  background:url('./assets/ship-edge-horizontal.png');
+  transform: rotate(270deg);
+}
+.VCenter{
+  background:url('./assets/ship-center-horizontal.png');
+  transform: rotate(90deg);
+}
+
+.destroyer {
+  background-color: cornflowerblue;
+}
+
+.submarine {
+  background-color: cornflowerblue;
+}
+
+.cruiser {
+  background-color: cornflowerblue;
+}
+
+.battleship {
+  background-color: cornflowerblue;
+}
+
+.carrier {
+  background-color: cornflowerblue;
+}
+
+.hit {
+  /* background-color: red; */
+  content: URL('./assets/Hit.png')
+}
+
+.miss {
+   /* background-color: black; */
+   content: URL('./assets/Miss2.png')
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,67 +1,38 @@
-.profile-header {
-  /*background-image: linear-gradient(to bottom, #7A88FF, #7AFFAF);*/
-  background-image: linear-gradient(to bottom, black, gray);
-  height: 200px;
-  /*opacity: 0.7;*/
+.container {
+  margin-top: 50px;
+  color: white;
+  border: 3px solid white;
+  border-radius: 10px;
+  float: left;
+  margin-left: 75px;
+  display: flex;
+  flex-direction: column;
 }
+
+.username {
+  font-size: 50px;
+  padding: 20px;
+}
+
+.user-email {
+  padding: 0 20px 20px 20px;
+}
+
+.btn {
+  position: absolute;
+  font-size: 40px;
+  right: 200px;
+  top: 90px;
+}
+
+
+
 .profile-body {
   height: 100vh;
   z-index: 0;
   padding: 0;
   margin: 0;
-  /*background-image: url('https://www.wallpaperflare.com/static/279/791/689/world-of-warships-wargaming-net-ship-explosion-wallpaper.jpg');*/
-  /*background-image: url('../../../assets/imgs/battleship.webp'),url('../../../assets/imgs/battleship.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;*/
-  background-image: linear-gradient(to bottom, gray, black);
 }
-.userimg {
-  position: absolute;
-  left: 200px;
-  top: 125px;
-  width: 150px;
-  height: 150px;
-  box-shadow: 0 0 50px #e3f4fa;
-  border-style: solid;
-  border-width: 4px;
-  border-color: beige;
-  opacity: 1;
-}
-.username {
-  position: absolute;
-  right: 400px;
-  top: 20px;
-  height: 100px;
-  text-align: center;
-  Line-height: 100px;
-  color: white;
-  opacity: 1;
-}
-.useremail {
-  position: absolute;
-  right: 400px;
-  top: 100px;
-  height: 100px;
-  text-align: center;
-  Line-height: 100px;
-  color: white;
-  opacity: 1;
-}
-
-
-
-.homebtn {
-  position: absolute;
-  right: 200px;
-  top: 100px;
-  background-color: darkgray;
-  color: white;
-  opacity: 1;
-}
-  .homebtn:hover {
-    background-color: #657378;
-    opacity: 1;
-  }
 
 .bodydiv{
   background-color: white;
@@ -69,6 +40,7 @@
   height: 125px;
   opacity:0.7;
   text-align:center;
+  border-radius:5px;
 }
 .totalmatch {
   position: absolute;
@@ -77,24 +49,20 @@
 }
 .totalwin {
   position: absolute;
-  right: 400px;
+  left: 800px;
   top: 300px;
 }
 .winsteak {
   position: absolute;
   left: 400px;
-  bottom: 100px;
+  top: 500px;
 }
 .shotstreak {
   position: absolute;
-  right: 400px;
-  bottom: 100px;
+  left: 800px;
+  top: 500px;
 }
 h4{
     margin-top:10px;
     margin-bottom:20px;
 }
-
-
-
-

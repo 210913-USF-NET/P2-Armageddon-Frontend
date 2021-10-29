@@ -17,7 +17,7 @@ export class PlayAsGuestComponent implements OnInit {
   user: user = {
     id: 0,
     username: 'random',
-    password: 'password',
+    email: 'password',
     winStreak: 0,
     shotStreak: 0,
     totalWins: 0,
@@ -36,13 +36,13 @@ export class PlayAsGuestComponent implements OnInit {
     var randomName = Math.random().toString(36).substr(2);
     this.user.username = randomName;
     var randomPassword = Math.random().toString(36).substr(2);
-    this.user.password = randomPassword;
- 
+    this.user.email = randomPassword;
+    //bug
     /*this.bsService.addUser(this.user).then((res) => {
       alert('Welcome Guess:' + randomName+ '!')
       this.router.navigateByUrl(`home/${this.user.username}`);
     });*/
     
-    this.router.navigateByUrl(`home/${this.user.username}`);
+    this.router.navigateByUrl(`home`);
   }
 }

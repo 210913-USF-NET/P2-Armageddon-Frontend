@@ -1,8 +1,8 @@
-export interface layOut{
+export interface layout{
     id: number;
     playerId: number;
     matchId: number;
     shipType: string;
-    startLocation: [];
+    startLocation: number;
     direction: string;
 }

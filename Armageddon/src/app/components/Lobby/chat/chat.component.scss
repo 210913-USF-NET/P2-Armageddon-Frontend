@@ -1,0 +1,175 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/*.chat {
+  position: absolute;
+  left: 500px;
+  top: 400px;
+  width:40%;
+  height:40%;
+}*/
+.text-center {
+  text-align: center;
+}
+
+h2 {
+  margin: 0;
+}
+
+.msg-italic-style {
+  font-style: italic;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 18px;
+}
+
+
+
+
+// body
+.ud-body {
+  /*position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;*/
+  margin: 5vh 10% 1vh;
+  //padding: 0 5% 0;
+.msg-box{
+  width: 100%;
+  height: 450px;
+  margin-top: -30px;
+  border: 2px solid #191D32;
+  border-radius: .5em;
+  padding: 20px 20px;
+  font-size: 14px;
+  overflow: auto;
+  ul
+{
+  list-style: none;
+  .ex-msg
+{
+  margin-bottom: 10px;
+  color: black;
+  text-align: left;
+}
+
+.in-msg {
+  margin-bottom: 10px;
+  color: cornflowerblue;
+  text-align: right;
+}
+
+}
+}
+
+.ud-flex-row {
+  margin-top: 20px;
+  height: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  .msg-input
+
+{
+  height: 100%;
+  border-radius: .5em;
+  border: 0px solid rgba(0, 0, 0, 0);
+  padding: 10px;
+  flex: 1 1 0;
+  border: 1.5px solid black;
+}
+
+.msg-input:focus {
+  outline: none;
+  border-color: green;
+  box-shadow: 0 0 5px green
+}
+
+.send-btn {
+  height: 100%;
+  width: 100px;
+  border-radius: .3em;
+  background-color: green;
+  margin-left: 20px;
+  border: 0px solid rgba(0, 0, 0, 0);
+  font-size: 25px;
+  color: #FDFFFF;
+  position: relative;
+}
+
+  .send-btn:focus {
+    outline: none;
+    border-color: green;
+    box-shadow: 0 0 5px green;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+  .ud-flex-row {
+    flex-direction: column;
+    align-items: flex-start;
+    height: 80px;
+    .msg-input
+
+{
+  width: 100%;
+}
+
+.send-btn {
+  margin-left: 0px;
+  font-size: 20px;
+  margin-top: 7px;
+  height: 80%;
+}
+
+}
+}
+
+.name-box {
+  margin-top: 10px;
+  height: 40px;
+  width: 180px;
+  border-radius: .5em;
+  border: 0px solid rgba(0, 0, 0, 0);
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #b423d1;
+}
+
+  .name-box:focus {
+    outline: none;
+  }
+
+}
+
+.msg-box::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  /**/
+}
+
+.msg-box::-webkit-scrollbar-track {
+  background: rgb(239, 239, 239);
+  border-radius: 2px;
+}
+
+.msg-box::-webkit-scrollbar-thumb {
+  background: #bfbfbf;
+  border-radius: 10px;
+}
+
+.msg-box::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
+
+.msg-box::-webkit-scrollbar-corner {
+  background: #179a16;
+}
+
+

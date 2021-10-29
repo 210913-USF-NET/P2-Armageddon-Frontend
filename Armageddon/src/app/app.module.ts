@@ -15,7 +15,15 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { PlayAsGuestComponent } from './components/authentication components/play-as-guest/play-as-guest.component';
 import { TitleCardComponent } from './components/Title/title-card/title-card.component';
 import { LeaderboardComponent } from './components/Title/leaderboard/leaderboard.component';
+import { PlayButtonComponent } from './components/authentication components/play-button/play-button.component';
+import { LobbyComponent } from './pages/lobby/lobby.component';
+import { ProfilebuttonComponent } from './components/Lobby/profilebutton/profilebutton.component';
 import { HomeComponent } from './pages/home/home.component';
+import { FriendListComponent } from './friend-list/friend-list.component';
+import { TalkjsComponent } from '../app/talkjs/talkjs.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChatComponent } from './components/Lobby/chat/chat.component';
+import { ReadyComponent } from './components/Lobby/ready/ready.component';
 /*import { GoHomeComponent } from './components/authentication components/go-home-button';*/
 
 @NgModule({
@@ -30,7 +38,14 @@ import { HomeComponent } from './pages/home/home.component';
     PlayAsGuestComponent,
     TitleCardComponent,
     LeaderboardComponent,
-    HomeComponent
+    HomeComponent,
+    FriendListComponent,
+    PlayButtonComponent,
+    LobbyComponent,
+    ProfilebuttonComponent,
+    TalkjsComponent,
+    ChatComponent,
+    ReadyComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +55,8 @@ import { HomeComponent } from './pages/home/home.component';
     AuthModule.forRoot({
       domain: environment.authDomain,
       clientId: environment.authClientId
-    })
+    }),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
