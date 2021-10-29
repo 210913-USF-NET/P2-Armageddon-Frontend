@@ -42,7 +42,6 @@ export class PlayAsGuestComponent implements OnInit {
       alert('Welcome Guess:' + randomName+ '!')
       this.router.navigateByUrl(`home/${this.user.username}`);
     });*/
-    
     this.router.navigateByUrl(`home`);
   }
 }
