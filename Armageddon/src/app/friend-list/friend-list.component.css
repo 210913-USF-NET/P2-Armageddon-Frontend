@@ -1,6 +1,26 @@
+.mainbody{
+  border-radius: 10px;
+  max-height:40%;
+  overflow:auto;
+}
+
+h3 {
+  font-size: 35px;
+  padding: 10px 0;
+}
+
+.friend {
+  font-size: 20px;
+}
+
+.btn:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+  border: 1px solid black;
+  color: white;
+}
+
 .btns{
-    background-color:white;
-    border-radius:0;
+  text-align:center;
 }
 
 .overlay {
@@ -67,19 +87,4 @@
 
 .active{
     background-color:lightgray;
-}
-
-.btns{
-    text-align:center;
-}
-.btn1{
-    padding-right:35px;
-}
-.btn2 {
-  padding-left: 35px;
-}
-
-.mainbody{
-    max-height:40%;
-    overflow:auto;
 }

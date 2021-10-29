@@ -5,6 +5,7 @@ import { match } from 'src/app/models/match';
 import { turn } from 'src/app/models/turn';
 import { user } from 'src/app/models/user';
 import { ArmageddonApiService } from 'src/app/service/armageddon-api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board',
@@ -56,6 +57,8 @@ export class BoardComponent implements OnInit {
   component: any
   gameStarted: any
 
+  content: any
+
   match: match = {
     id: 0,
     hostId: 0,
@@ -64,70 +67,90 @@ export class BoardComponent implements OnInit {
     opponentId: 0
   }
 
-  layouts:layout[] = [
-      { 'id': 0,
+  layouts: layout[] = [
+    {
+      'id': 0,
       'playerId': 0,
       'matchId': 0,
       'shipType': '',
       'startLocation': 0,
-      'direction': '' },
-      { 'id': 0,
+      'direction': ''
+    },
+    {
+      'id': 0,
       'playerId': 0,
       'matchId': 0,
       'shipType': '',
       'startLocation': 0,
-      'direction': '' },
-      { 'id': 0,
+      'direction': ''
+    },
+    {
+      'id': 0,
       'playerId': 0,
       'matchId': 0,
       'shipType': '',
       'startLocation': 0,
-      'direction': '' },
-      { 'id': 0,
+      'direction': ''
+    },
+    {
+      'id': 0,
       'playerId': 0,
       'matchId': 0,
       'shipType': '',
       'startLocation': 0,
-      'direction': '' },
-      { 'id': 0,
+      'direction': ''
+    },
+    {
+      'id': 0,
       'playerId': 0,
       'matchId': 0,
       'shipType': '',
       'startLocation': 0,
-      'direction': '' },
-      { 'id': 0,
+      'direction': ''
+    },
+    {
+      'id': 0,
       'playerId': 0,
       'matchId': 0,
       'shipType': '',
       'startLocation': 0,
-      'direction': '' },
-      { 'id': 0,
+      'direction': ''
+    },
+    {
+      'id': 0,
       'playerId': 0,
       'matchId': 0,
       'shipType': '',
       'startLocation': 0,
-      'direction': '' },
-      { 'id': 0,
+      'direction': ''
+    },
+    {
+      'id': 0,
       'playerId': 0,
       'matchId': 0,
       'shipType': '',
       'startLocation': 0,
-      'direction': '' },
-      { 'id': 0,
+      'direction': ''
+    },
+    {
+      'id': 0,
       'playerId': 0,
       'matchId': 0,
       'shipType': '',
       'startLocation': 0,
-      'direction': '' },
-      { 'id': 0,
+      'direction': ''
+    },
+    {
+      'id': 0,
       'playerId': 0,
       'matchId': 0,
       'shipType': '',
       'startLocation': 0,
-      'direction': '' }
+      'direction': ''
+    }
   ]
-  turns:turn[] = [];
-  counter:number = 0;
+  turns: turn[] = [];
+  counter: number = 0;
   name: string = ''
   user: user = {
     'id': 0,
@@ -142,7 +165,7 @@ export class BoardComponent implements OnInit {
 
   gridLocation: any
 
-  constructor(private renderer: Renderer2, private el: ElementRef, private armAPI: ArmageddonApiService, private auth: AuthService) { }
+  constructor(private router: Router, private renderer: Renderer2, private el: ElementRef, private armAPI: ArmageddonApiService, private auth: AuthService) { }
 
   ngOnInit(): void {
     this.auth.user$.subscribe(
@@ -196,6 +219,8 @@ export class BoardComponent implements OnInit {
     this.cpuCarrierCount = 0
 
     this.gameStarted = false
+
+    this.content = document.getElementById('content')
 
     this.shipArray = [
       {
@@ -301,9 +326,8 @@ export class BoardComponent implements OnInit {
       //     this.computerSquares[randomStart + index].classList.remove('empty'));
 
       let direction: string
-      (randomDirection)? direction = 'down': direction = 'right'
-      switch(ship.name)
-      {
+      (randomDirection) ? direction = 'down' : direction = 'right'
+      switch (ship.name) {
         case "destroyer":
           this.layouts[5] = {
             "id": 0,
@@ -466,9 +490,8 @@ export class BoardComponent implements OnInit {
     // Saves the player layouts to an array to be pushed later. 
     let start = parseInt(this.gridLocation) - this.selectedShipIndex;
     let direction: string
-    (this.isHorizontal)? direction = 'right': direction = 'down'
-    switch(this.draggedShip.firstChild.id)
-    {
+    (this.isHorizontal) ? direction = 'right' : direction = 'down'
+    switch (this.draggedShip.firstChild.id) {
       case "destroyer-0":
         this.layouts[0] = {
           "id": 0,
@@ -586,7 +609,7 @@ export class BoardComponent implements OnInit {
     }
 
     // [TODO] Add player turn to turns
-    let turn:turn = {
+    let turn: turn = {
       id: 0,
       playerId: this.user.id,
       targetId: 0,
@@ -629,7 +652,7 @@ export class BoardComponent implements OnInit {
       this.checkForWins()
     } else this.computerGo()
 
-    let turn:turn = {
+    let turn: turn = {
       id: 0,
       playerId: 0,
       targetId: this.user.id,
@@ -706,8 +729,7 @@ export class BoardComponent implements OnInit {
     // Add matchId to Layouts
     // Send Layouts to DB. 
     // Send Turns to DB. 
-    if (!this.isGameOver)
-    {
+    if (!this.isGameOver) {
       console.log(this.user.totalMatches);
       this.user.totalMatches++;
       this.match.turnCount = this.counter;
@@ -725,8 +747,13 @@ export class BoardComponent implements OnInit {
       )
       this.armAPI.updateUser(this.user)
     }
-    
+
     this.isGameOver = true
     this.startButton.removeEventListener('click', this.playGame)
+    this.content.disabled = false
+  }
+
+  goHome(): void {
+    this.router.navigateByUrl('home/:name')
   }
 }
