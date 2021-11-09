@@ -5,7 +5,7 @@
 
 Battleship as inspired by Tetris 99
 
-The Armageddon App is a web-based game for playing the classic game "Battleship" with the computer. You can create an account and you can start a game of battleship against the computer and make yourself be on top of the leaderboard. You can also use the chat functionality locally among other users.
+The Armageddon App is a web-based game for playing the classic game "Battleship" with the computer. You can create an account and you can start a game of battleship against the computer and see your position on the leaderboard. You can also use the chat functionality locally among other users.
 
 ## Technologies Used
 
