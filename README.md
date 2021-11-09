@@ -1,4 +1,4 @@
-# P2-Armageddon-Backend
+# P2-Armageddon-Frontend
 Battleship as inspired by Tetris 99
 
 Overview
