@@ -24,7 +24,6 @@ The Armageddon App is a web-based game for playing the classic game "Battleship"
 
 ## Features
 
-List of features ready and TODOs for future development
 * User can  sign up and create new accounts.
 * User can view their profile.
 * User can add friends.
@@ -34,6 +33,7 @@ List of features ready and TODOs for future development
 * The app will let the user know when they sink a ship.
 * The app will let the user know who won the game of battleship.
 * The app also shows a leaderboard.
-To-do list:
+
+## TODOs for future development
 * Make the game multiplayer.
 * Players can chat in real time with other players in their lobby.
